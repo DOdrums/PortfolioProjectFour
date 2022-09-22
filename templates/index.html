@@ -2,6 +2,11 @@
 
 {% block content %}
 
+{% for treatment in treatments %}
+<div>
+    <p>{{ treatment.title }}</p>
+</div>
+{% endfor %}
 <div>
     <p>hey!</p>
 </div>
