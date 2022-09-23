@@ -1,15 +1,12 @@
-from django.shortcuts import render, get_object_or_404
-from django.views import generic, View
-from django.views.generic.list import ListView
+from django.shortcuts import render
+from django.views import View
 from .models import Treatment
 
 
 # Create your views here.
-class HomePage(ListView):
-    model = Treatment
-    template_name = "index.html"
+class HomePage(View):
 
-    def get_treatment_data(self):
-        queryset = Treatment.objects.order_by('title')
-        treatments = queryset.objects.values()
-        return treatments
+    def get(self, request):
+        # queryset = Treatment.objects.order_by("title").values()
+        treatments = {"treat": "hello", "lol": "bananananaan", "soup": "jaaaaa"}
+        return render(request, "index.html", context=treatments)
