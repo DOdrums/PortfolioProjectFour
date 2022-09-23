@@ -7,6 +7,6 @@ from .models import Treatment
 class HomePage(View):
 
     def get(self, request):
-        # queryset = Treatment.objects.order_by("title").values()
-        treatments = {"treat": "hello", "lol": "bananananaan", "soup": "jaaaaa"}
+        queryset = list(Treatment.objects.order_by("title").values())
+        treatments = {"treatments": queryset}
         return render(request, "index.html", context=treatments)
