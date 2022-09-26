@@ -5,3 +5,14 @@ body {
 .fa-ul {
     margin-left: 2rem;
 }
+
+/* Devices 992px and down */
+@media (max-width: 992px) {
+
+    /* make footer items centered */
+    .fa-li {
+        margin: 0 auto;
+        left: 0;
+        width: inherit;
+    }
+}
