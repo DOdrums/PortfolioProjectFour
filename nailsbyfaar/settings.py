@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'cloudinary_storage',
+    'fontawesomefree',
     'django.contrib.staticfiles',
     'cloudinary',
     'salon',
