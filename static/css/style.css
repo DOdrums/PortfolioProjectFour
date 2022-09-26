@@ -10,6 +10,10 @@ body {
 @media (max-width: 992px) {
 
     /* make footer items centered */
+    .fa-ul {
+        margin-left: 0;
+    }
+
     .fa-li {
         margin: 0 auto;
         left: 0;
