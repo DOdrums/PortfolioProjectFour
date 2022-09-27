@@ -7,6 +7,11 @@ body {
     margin-left: 2rem;
 }
 
+.card-img-top {
+    margin-top: 9px;
+    border-radius: 4px;
+}
+
 
 /* Devices 992px and down */
 @media (max-width: 992px) {
