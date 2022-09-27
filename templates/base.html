@@ -20,9 +20,42 @@
 </head>
 
 <body>
-    <nav>
-        <p>nav links</p>
-    </nav>
+    <header>
+        <nav class="navbar navbar-expand-md">
+            <div class="container-fluid">
+                <a href="#" class="navbar-brand"><img
+                        src="https://res.cloudinary.com/dirkornee/image/upload/v1664288705/logo_yzqrty.jpg"
+                        alt="logo-nailsbyfaar" style="height: 86px; border-radius: 50%;"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link fs-5">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link fs-5">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link fs-5">Treatments</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link fs-5">Gallery</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link fs-5">Book</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link fs-5">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
     <main>
         {% block content %}
         {% endblock content %}
