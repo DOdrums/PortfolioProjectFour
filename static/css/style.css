@@ -2,14 +2,31 @@ body {
     background-color: #F3CBBE;
 }
 
+/* homepage */
+
 .fa-ul {
     /* class to align items in footer list */
     margin-left: 2rem;
 }
 
 .card-img-top {
+    /* align images in homepage treatment cards */
     margin-top: 9px;
     border-radius: 4px;
+}
+
+.full-width {
+    /* class to extend max-width in bootstrap containers */
+    max-width: 1400px;
+}
+
+.btn-card {
+    --bs-btn-bg: #BC8180;
+    --bs-btn-border-color: #BC8180;
+    --bs-btn-hover-bg: #A17772;
+    --bs-btn-hover-border-color: #A17772;
+    --bs-btn-active-bg: #672A2E;
+    --bs-btn-active-border-color: #672A2E;
 }
 
 
@@ -25,11 +42,6 @@ body {
         margin: 0 auto;
         left: 0;
         width: inherit;
-    }
-
-    .full-width {
-        /* class to unset max-width in bootstrap containers */
-        max-width: 1000px;
     }
 
 }

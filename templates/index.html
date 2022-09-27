@@ -8,8 +8,8 @@
             <img src="{{ treatment.image.url }}" alt="image of nail treatment" class="card-img-top">
             <div class="card-body">
                 <h5 class="card-title">{{ treatment.appointment_type }}</h5>
-                <p class="card-text">{{ treatment.description }}</p>
-                <a href="#" class="btn btn-primary">Book Now</a>
+                <p class="card-text">{{ treatment.short_description }}</p>
+                <a href="#" class="btn btn-secondary btn-lg col-12 btn-card">Book Now</a>
             </div>
         </div>
         {% endfor %}
