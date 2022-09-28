@@ -20,6 +20,19 @@ body {
     max-width: 1400px;
 }
 
+.hero-outer {
+    height: 1037px;
+    width: 100%;
+}
+
+.hero-image {
+    background: url(https://res.cloudinary.com/dirkornee/image/upload/v1664370986/hero-image_k1mzpy.jpg) center center;
+    height: 1022px;
+    margin-top: -468px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 .btn-card {
     --bs-btn-bg: #BC8180;
     --bs-btn-border-color: #BC8180;
