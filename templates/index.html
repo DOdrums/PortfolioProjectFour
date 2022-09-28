@@ -1,10 +1,35 @@
 {% extends "base.html" %}
 
 {% block content %}
+<!-- hero image -->
 <section class="hero-outer">
     <div class="hero-image">
     </div>
 </section>
+
+<section>
+    <div class="container mt-5">
+        <div class="row m-2 p-5">
+            <div class="col-6 mt-5 p-5">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia dolor sit debitis veritatis tempore
+                    earum atque, id aperiam labore! Itaque ut quo quis provident hic mollitia illum alias. Excepturi,
+                    assumenda. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus similique, nesciunt
+                    aspernatur totam quaerat cumque alias repudiandae voluptates odit ullam vitae sapiente aperiam
+                    voluptatibus distinctio fugit natus impedit consequuntur. Incidunt. Lorem ipsum dolor sit amet
+                    consectetur adipisicing elit. Nihil, fugiat, eius eum ratione ullam mollitia voluptates blanditiis
+                    voluptatibus, aut voluptatum cupiditate ab sed atque impedit perferendis temporibus minus aperiam
+                    optio?</p>
+            </div>
+            <div class="col-6">
+                <img class="img-fluid"
+                    src="https://res.cloudinary.com/dirkornee/image/upload/v1664376102/salon_ryti69.jpg"
+                    alt="image of salon NailsbyFaar">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- treaments -->
 <div class="container p-sm-4 full-width">
     <div class="row p-sm-0 p-4">
         {% for treatment in treatments %}
