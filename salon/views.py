@@ -10,3 +10,8 @@ class HomePage(View):
         queryset = list(Treatment.objects.filter(display=True).order_by("title").values())
         treatments = {"treatments": queryset}
         return render(request, "index.html", context=treatments)
+
+class BookingModule(View):
+
+    def get(self, request):
+        return render(request, "book.html")
