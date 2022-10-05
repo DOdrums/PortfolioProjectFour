@@ -1,108 +1,211 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Smart House Inventory
 
-Welcome DOdrums,
+## Portfolio Project 3: Python Essentials
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+![Multi screen mockup](assets/images/mockup.png)
 
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **September 1, 2021**
+This project is built as part of the Code Institute Full Stack Software Development course. For this course, Dirk Ornee had to built a fourth Portfolio Project. Since his cousin just started a nail salon and was in dire need of a website with booking module, what better way to build a fourth Portfolio Project and help somebody at the same time!
+## Live Site
 
-## Gitpod Reminders
+[Smart House Inventory](https://smart-house-inventory.herokuapp.com/)
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+## Github Repository
 
-`python3 -m http.server`
+[PortfolioProjectThree](https://github.com/DOdrums/PortfolioProjectThree)
 
-A blue button should appear to click: _Make Public_,
 
-Another blue button should appear to click: _Open Browser_.
+## UX
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+### Business Goals
 
-A blue button should appear to click: _Make Public_,
+The goal of this project is to assist a user in keeping track of their house inventory and getting insights into when they should run out to the store to replenish some of their favorite products. It's built as a single user application, but could be forked and used with personal a Google Sheets account.
 
-Another blue button should appear to click: _Open Browser_.
+### Target Audience
 
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+I think a lot of people recognize the feeling of opening their fridge and finding their beautiful salmon or steak has sadly expired. Or perhaps you want to turn on the dishwasher at night and find yourself out of dishwasher tablets. Even worse, you are in the bathroom and have only one sheet of toilet paper left. Awkward and wasteful situations that can easily be prevented! With the smart house inventory you can easily generate an inventory with estimations when to get new products and neatly keep track of their expiry dates. So, this app is for anybody who whishes to keep better track of their house inventory.
 
-To log into the Heroku toolbelt CLI:
+### User Stories
 
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+#### As the owner
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
+* I want to build a helpful tool so users can better manage the inventory in their house.
+* I want the user to waste less food.
+* I want the user to not run out of products.
+* I want the user to have a clear and well structured visual of their stock.
 
-------
+#### As a new user
 
-## Release History
+* I want to understand the purpose of the app straight away, even if I stumbled upon it randomly.
+* I want to intuitively navigate the app and have clear explanations about each section and function.
+* I want to manage the stock in my house.
+* I want the app to be smart and do things automatically for me.
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+#### As a returning user
 
-**September 1 2021:** Remove `PGHOSTADDR` environment variable.
+* I want to be able to use the app in a quick way, without having to scroll trough needless explanations and options.
+* I want to get an update about my stock each time I open the app.
+* I want to get insights from the app about my stock and what I should do.
 
-**July 19 2021:** Remove `font_fix` script now that the terminal font issue is fixed.
+### Structure of the app
 
-**July 2 2021:** Remove extensions that are not available in Open VSX.
+The app is designed to have a good flow, with clear options explained in a short and concise way. Inventory explanations is purposefully put on top, so returning users don't have to scroll through it every time to get to their inventory. The inventory is fully editable and products can be added to both lists easily.
 
-**June 30 2021:** Combined the P4 and P5 templates into one file, added the uptime script. See the FAQ at the end of this file.
+### Logic
 
-**June 10 2021:** Added: `font_fix` script and alias to fix the Terminal font issue
+A flowchart was created to make the business logic more clear and as a guide while building the project. Notably missing are the delete and edit function in the inventory and the explanation function on the main page, since this flowchart was created at the start of the process and not updated throughout.
 
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
+![flowchart](assets/images/flowchart.jpg)
 
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
+### Color Scheme
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
+Although colors are used on a few lines of text, no real color scheme was used. The text displays either purple, cyan or white.
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
+### Features
 
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
+The app is divided into two main sections, 'show/edit inventory' and 'add a product'. These two sections together hold all the features of the app. The third option is a explanation page and the last is simply to quit the app.
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
+#### Main page
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
+This page shows a short introduction of the app and gives you the option to either show your inventory, add a product or get an explanation of the full app. New users are encouraged to read the explanation first.
 
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
+![main page](assets/images/app-home.png)
 
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
+#### Explanation
 
-------
+So, after you first open the app, you will most likely navigate to the explanation page. This is simply a page with an explanation of most of the features in this app. The inventory will show some extra explanation for each individual column.
 
-## FAQ about the uptime script
+![explanation](assets/images/app-explanation.png)
 
-**Why have you added this script?**
+#### Inventory
 
-It will help us to calculate how many running workspaces there are at any one time, which greatly helps us with cost and capacity planning. It will help us decide on the future direction of our cloud-based IDE strategy.
+After reading the explanation, user is encouraged to visit the inventory. Here they can find the products (if any were added already) and read more about each individual column.
 
-**How will this affect me?**
+![inventory](assets/images/app-inventory.png)
 
-For everyday usage of Gitpod, it doesn’t have any effect at all. The script only captures the following data:
+![inventory](assets/images/app-inventory-options.png)
 
-- An ID that is randomly generated each time the workspace is started.
-- The current date and time
-- The workspace status of “started” or “running”, which is sent every 5 minutes.
+#### Edit
 
-It is not possible for us or anyone else to trace the random ID back to an individual, and no personal data is being captured. It will not slow down the workspace or affect your work.
+After being presented with the inventory options, if user presses E, they can edit certain fields in the inventory. They will be guided through a series of questions, depending on the option they choose.
 
-**So….?**
+![edit](assets/images/app-edit.png)
 
-We want to tell you this so that we are being completely transparent about the data we collect and what we do with it.
+#### Delete
 
-**Can I opt out?**
+If the user presses D, they can delete one or multiple items of the list.
 
-Yes, you can. Since no personally identifiable information is being captured, we'd appreciate it if you let the script run; however if you are unhappy with the idea, simply run the following commands from the terminal window after creating the workspace, and this will remove the uptime script:
+![edit](assets/images/app-delete.png)
 
-```
-pkill uptime.sh
-rm .vscode/uptime.sh
-```
+#### Add product
 
-**Anything more?**
+If user pressed R in their inventory, they will return to the home/main page of the app. Here they can hit A to add a product. This will guide them trough a series of questions again, to make sure the user adds the product properly. Each question will also run validations on the users' answers.
 
-Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` file so that you know what it's doing. As future software developers, it will be great practice to see how these shell scripts work.
+![add](assets/images/app-add-product.png)
 
----
+![add](assets/images/app-add-product2.png)
 
-Happy coding!
+### Future Features
+
+For this app there are two important future features that would greatly increase it's usability.
+
+#### Multi-user support
+
+Include a login page, so users can have their personal google sheet connected without forking the code into their own project. This would probably work better with a general database instead of google sheets though.
+
+#### Notifications
+
+It would be great if a user could enter their email, telephone number or other communication channel, to get notified whenever a product almost runs out. They could also set a daily (or other interval) mail with their inventory.
+
+#### Expiry date warning
+
+Last functionality that could be worthwhile, is to add a feature that notifies the user when the expiry date comes close. This could be either inside the inventory, or via mail/phone etc.
+
+## Data Model
+
+As a data model the app uses a Product class. An instance of this class is created everytime a product is made. It will hold the name, quantity and days per use of the product and generate a date added. The Food class inherits from the Product class and extends it with a expiry date. The Product class also holds the add_product method, which adds the product to the google sheet whenever it's called. The google sheet stores any date. Below are pictures of both sheets that are used for the Food and Item inventory.
+
+![food sheet](assets/images/sheet-food.png)
+
+![item sheet](assets/images/sheet-item.png)
+
+
+## Credits
+
+### Code
+
+* [Stackoverflow(answer from 'Aaron')](https://stackoverflow.com/a/61139427/16545052) - for the regex validation on the 'allowed_times' model.
+
+### Images
+
+All images used in the readme are screenshots of the project and a multi device mock up generated with [mockup generator](https://techsini.com/multi-mockup/index.php)
+The app itself does not contain any images.
+
+### Technologies used
+
+[HTML](https://html.spec.whatwg.org/) - for the structure of the website and mocking of the terminal (written by Code Institute)
+
+[CSS](https://www.w3.org/Style/CSS/Overview.en.html) - to provide styling to the page.
+
+[JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) - for the structure of the website and mocking of the terminal (written by Code Institute)
+
+[Python](https://www.python.org/) - to write all the logic of the app, using the following libraries:
+* Datetime - to generate and manipulate dates easily
+* Math library - to round up the quantity when calculating left over quantity.
+* Re library - for using Regex to validate user input (would've been very verbose otherwise).
+* Gspread and Credentials - for connecting to the google sheet and editing/reading it.
+
+[Gitpod](https://www.gitpod.io/) - used to connect a browser based VScode to github.
+
+[Github](https://github.com/) - used for version control and deployment of the website.
+
+[Heroku](https://dashboard.heroku.com/) - to deploy the app.
+
+[PEP8 Online](http://pep8online.com/) - to validate the Python code.
+
+[Multi Device Website Mockup Generator](https://techsini.com/multi-mockup/index.php) - to create an image of the website shown on different devices.
+
+## Testing
+
+Extensive testing was done to make sure all the features work as expected and all validations fire when needed. 
+
+### Pep 8 Online
+
+The code was run through the Pep 8 online validator to ensure no obvious errors were left in the code. The validator returned three warnings:
+
+![pep8](assets/images/pep8-validation.png)
+
+After fixing these warnings, no errors were returned:
+
+![pep8 good](assets/images/pep8-good.png)
+
+Futhermore, lighthouse was used to check the websites performance and usability. This returned a subpar SEO score:
+
+![lighthouse](assets/images/lighthouse-bad.png)
+
+This rating was due to the meta tags missing in the html. After adding these meta tags, the score came back much better:
+
+![lighthouse good](assets/images/lighthouse-good.png)
+
+### Bugs
+
+* When creating the ```Food``` subclass, an error ```"too many positional arguments for method call"``` would pop up. This was caused by the ```date_added``` variable being passed as an argument, while in the ```Product``` parent class, this is not passed as an argument. After removing this argument from the ```Food``` init method, the error was resolved and the class worked as expected.
+* When using the ```sort()``` method in the ```delete_product()``` function, it kept returning ```None```. The reason for this, is that the ```sort()``` method sorts a list in place, instead of returning a new list. When writing ```list = list.sort()``` the result will be ```None``` because of this.
+
+#### Deployment
+
+To test the app locally, the terminal within VScode was used. To do this simply enter the command ```python run.py``` to start up the app.
+
+When the project was almost finished, it was deployed to Heroku via the following steps:
+* Create a new app in Heroku.
+* Select "New" and "Create new app".
+* Give the new app a name and click "Create new app".
+* Click "Settings".
+* Navigate to the "Config Vars" section and click "Reveal Config Vars"
+* Add KEY: PORT, VALUE: 8000 and CREDS: "contents of creds.json file" to the config vars section.
+* In the "Buildpacks" add Python and Nodejs.
+* Under "Deployment Method" click on "GitHub" to get access to your repository.
+* Enable Automatic Deploys" or "Deploy Branch".
+
+## Acknowledgements
+
+This website was built as part of the Full Stack Software Development course from Code Institute. I would like to thank my mentor Adeye Adegbenga, for his excellent feedback and guidance throughout the development of the project. I would also like to thank friends and family, who all took a look at the finished project to make sure it worked well and if I could improve things.
