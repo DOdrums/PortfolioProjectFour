@@ -4,17 +4,7 @@ jQuery('#datepicker').datetimepicker({
     lang:'en',
     step: 5,
     todayButton:true,
-    allowTimes: [
-      '10:00',
-      '10:15',
-      '10:30',
-      '11:15',
-      '12:00',
-      '13:00',
-      '15:30',
-      '15:45',
-      '16:00',
-    ],
+    allowTimes: times,
     disabledWeekDays: [
       0, 2, 3, 4, 6
     ],

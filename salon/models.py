@@ -13,5 +13,5 @@ class Treatment(models.Model):
     display = models.BooleanField(default=False)
 
 class Planning(models.Model):
-    validate_times = RegexValidator(r'^(?:[01]\d|2[1-3]):[0-5]\d(?::[0-5]\d)?(?:,(?:[01]\d|2[1-3]):[0-5]\d(?::[0-5]\d)?)*$', 'Please enter comma seperated times, like so: 12:00, 13:15')
+    validate_times = RegexValidator(r'^(?:[01]\d|2[1-3]):[0-5]\d(?::[0-5]\d)?(?:,(?:[01]\d|2[1-3]):[0-5]\d(?::[0-5]\d)?)*$', 'Please enter comma seperated times, without spaces, like so: 12:00,13:15')
     allow_times = models.TextField(default="", validators=[validate_times])

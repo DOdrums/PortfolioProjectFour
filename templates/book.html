@@ -4,14 +4,23 @@
 {% block content %}
 <div class="container">
     <div class="row">
-        <div class="col-lg-4 col-12"></div>
-        <div class="col-lg-4 col-12"></div>
-        <div class="col-lg-4 col-12">
+        <div class="col-md-4 col-12">
+            <p>{{ planning }}</p>
+        </div>
+        <div class="col-md-4 col-12">
+            {% for plan in planning %}
+            <p>{{ plan }}</p>
+            {% endfor %}
+        </div>
+        <div class="col-md-4 col-12">
             <div id="datepicker"></div>
         </div>
     </div>
 </div>
 <link rel="stylesheet" type="text/css" href="{% static 'css/jquery.datetimepicker.css' %}" />
+<script>
+    var times = JSON.parse("{{ planning|escapejs }}");
+</script>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="{% static 'js/jquery.datetimepicker.full.min.js' %}"></script>
 <script src="{% static 'js/datepicker.js' %}"></script>
