@@ -134,6 +134,7 @@ As a data model the app uses a Product class. An instance of this class is creat
 ### Code
 
 * [Stackoverflow(answer from 'Aaron')](https://stackoverflow.com/a/61139427/16545052) - for the regex validation on the 'allowed_times' model.
+* [Stackoverflow(answer from 'xyres')](https://stackoverflow.com/a/43305140/16545052) - for using Django context variables in Javascript
 
 ### Images
 
