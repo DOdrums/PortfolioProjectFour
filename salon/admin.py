@@ -11,4 +11,4 @@ class TreatmentAdmin(admin.ModelAdmin):
 @admin.register(Planning)
 class PlanningAdmin(admin.ModelAdmin):
 
-    list_display = ['allow_times']
+    list_display = ['title']

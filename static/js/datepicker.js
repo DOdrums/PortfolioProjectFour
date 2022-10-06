@@ -4,11 +4,9 @@ jQuery('#datepicker').datetimepicker({
     lang:'en',
     step: 5,
     todayButton:true,
-    allowTimes: times,
+    allowTimes: times, 
     disabledWeekDays: [
       0, 2, 3, 4, 6
     ],
-    disabledDates: [
-      '28.10.2022'
-    ], formatDate: 'd.m.Y'
+    disabledDates: d_dates, formatDate: 'd.m.Y'
   });
