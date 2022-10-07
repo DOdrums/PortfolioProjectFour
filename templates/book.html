@@ -5,8 +5,8 @@
 <div class="container">
     <div class="row">
         <div class="col-md-4 col-12">
-            <p>{{ query }}</p>
-            <p>{{ ddats }}</p>
+            <p>{{ planning }}</p>
+            <p>{{ d_dates }}</p>
         </div>
         <div class="col-md-4 col-12">
             {% for time in times %}
@@ -20,8 +20,21 @@
 </div>
 <link rel="stylesheet" type="text/css" href="{% static 'css/jquery.datetimepicker.css' %}" />
 <script>
-    var times = JSON.parse("{{ times|escapejs }}");
-    var d_dates = JSON.parse("{{ d_dates|escapejs }}");
+    // var times = JSON.parse("{{ times|escapejs }}");
+    // var d_dates = JSON.parse("{{ d_dates|escapejs }}");
+    var planning = JSON.parse("{{ planning|escapejs }}")
+    var planningJS = planning[0]
+    // console.log(planningJS.allow_times)
+    // console.log(planningJS[0].allow_times)
+    // console.log(planningJS)
+    // for (let plan in planningJS) {
+    //     console.log(Object.values(plan[0]))
+    //     if (Object.values(plan).includes("Main planning")) {
+    //         console.log("Exists")
+    //     } else {
+    //         console.log("Does not exist")
+    //     }
+    // }
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="{% static 'js/jquery.datetimepicker.full.min.js' %}"></script>

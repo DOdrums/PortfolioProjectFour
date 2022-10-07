@@ -18,5 +18,6 @@ class BookingModule(View):
         queryset = list(Planning.objects.order_by("title").values())
         plan_list = queryset[0]["allow_times"].split(",")
         d_dates = queryset[0]["disabled_days"].split(",")
-        planning = {"times": json.dumps(plan_list), "d_dates": json.dumps(d_dates)}
+        planning = {"planning": json.dumps(queryset)}
+        # planning = {"times": json.dumps(plan_list), "d_dates": json.dumps(d_dates)}
         return render(request, "book.html", context=planning)
