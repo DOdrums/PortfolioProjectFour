@@ -21,3 +21,7 @@ class Planning(models.Model):
     allow_times = models.TextField(default="", validators=[validate_times])
     disabled_dates = models.TextField(default="", validators=[validate_dates])
     disabled_weekdays = models.TextField(default="", validators=[validate_weekdays])
+    active = models.BooleanField(default=False)
+
+# class Appointment(models.Model):
+#     treatment = models.ForeignKey(Treatment, )

@@ -22,19 +22,6 @@
 <script>
     var planning = JSON.parse("{{ planning|escapejs }}")
     var planningJS = planning[0]
-
-    // TODO: Build a for loop to check for "Main planning" only, so there is an option to have multiple plannings in admin and use only 1.
-    // console.log(planningJS.allow_times)
-    // console.log(planningJS[0].allow_times)
-    // console.log(planningJS)
-    // for (let plan in planningJS) {
-    //     console.log(Object.values(plan[0]))
-    //     if (Object.values(plan).includes("Main planning")) {
-    //         console.log("Exists")
-    //     } else {
-    //         console.log("Does not exist")
-    //     }
-    // }
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="{% static 'js/jquery.datetimepicker.full.min.js' %}"></script>

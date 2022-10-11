@@ -12,5 +12,5 @@ jQuery('#datepicker').datetimepicker({
     allowTimes: planningJS.allow_times.split(","), 
     disabledWeekDays: disabledWeekDaysList,
     disabledDates: planningJS.disabled_dates.split(","), formatDate: 'd.m.Y',
-    // Optionally add "allowDates: ["25.10.2022"], formatDate: 'd.m.Y'" , to allow only certain dates. For this to work, disabledDates and disabledWeekDays needs to be off. 
+    // Optionally add "allowDates: ["25.10.2022"], formatDate: 'd.m.Y'" , to allow only certain dates. For this to work, disabledDates and disabledWeekDays needs to be off/empty. 
   });

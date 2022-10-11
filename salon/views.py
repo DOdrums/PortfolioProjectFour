@@ -15,6 +15,6 @@ class HomePage(View):
 class BookingModule(View):
 
     def get(self, request):
-        queryset = list(Planning.objects.order_by("title").values())
+        queryset = list(Planning.objects.filter(active=True).order_by("title").values())
         planning = {"planning": json.dumps(queryset)}
         return render(request, "book.html", context=planning)
