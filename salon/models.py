@@ -4,7 +4,7 @@ from django.core.validators import RegexValidator
 from cloudinary.models import CloudinaryField
 
 class Appointment(models.Model):
-    # treatment = models.ForeignKey(Treatment, related_name="appointments", on_delete=models.SET_DEFAULT, default="Treatment")
+    type = models.ForeignKey("Treatment", related_name="appointments", on_delete=models.SET_DEFAULT, default="Treatment")
     date_time = models.DateTimeField()
 
 class Treatment(models.Model):
@@ -16,7 +16,7 @@ class Treatment(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     duration = models.DecimalField(max_digits=3, decimal_places=0)
     display = models.BooleanField(default=False)
-    appointment = models.ForeignKey(Appointment, on_delete=models.PROTECT, null=True)
+    # appointment = models.ForeignKey(Appointment, on_delete=models.PROTECT, null=True)
 
 class Planning(models.Model):
     validate_times = RegexValidator(r'^(?:[01]\d|2[1-3]):[0-5]\d(?::[0-5]\d)?(?:,(?:[01]\d|2[1-3]):[0-5]\d(?::[0-5]\d)?)*$', 'Please enter comma seperated times, without spaces, like so: 12:00,13:15')

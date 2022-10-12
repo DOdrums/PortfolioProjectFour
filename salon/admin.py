@@ -13,14 +13,14 @@ class PlanningAdmin(admin.ModelAdmin):
 
     list_display = ['title']
 
-class TreatmentInline(admin.StackedInline):
-    model = Treatment
+# class TreatmentInline(admin.StackedInline):
+#     model = Treatment
 
 @admin.register(Appointment)
 class AppointmentAdmin(admin.ModelAdmin):
 
     list_display = ['date_time']
-    inlines = [TreatmentInline]
+    # inlines = [TreatmentInline]
 
 
     # def get_treatment_title(self, obj):
