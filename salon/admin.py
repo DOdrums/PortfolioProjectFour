@@ -1,3 +1,4 @@
+from datetime import timedelta
 from django.contrib import admin
 from .models import Treatment, Planning, Appointment
 
@@ -13,19 +14,25 @@ class PlanningAdmin(admin.ModelAdmin):
 
     list_display = ['title']
 
-# class TreatmentInline(admin.StackedInline):
-#     model = Treatment
-
 @admin.register(Appointment)
 class AppointmentAdmin(admin.ModelAdmin):
 
-    list_display = ['date_time']
-    # inlines = [TreatmentInline]
+    list_display = ['date_time', 'get_end_time', 'get_treatment_duration', 'get_treatment_title']
+    ordering = ['-date_time']
 
+    @admin.display(description="Treatment")
+    def get_treatment_title(self, obj):
+        return obj.treatment_name.title
 
-    # def get_treatment_title(self, obj):
-    #     return obj.treatment.title
+    @admin.display(description="Duration")
+    def get_treatment_duration(self, obj):
+        return obj.treatment_name.duration
 
-    # def get_treatment_duration(self, obj):
-    #     return obj.treatment.duration
+    @admin.display(description="End Time")
+    def get_end_time(self, obj):
+        start_time = obj.date_time
+        duration = int(obj.treatment_name.duration)
+        end_time = start_time + timedelta(minutes=duration)
+        return end_time
+        
     
