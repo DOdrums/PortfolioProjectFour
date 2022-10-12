@@ -20,7 +20,7 @@ class BookingModule(View):
         appointmentQueryset = list(Appointment.objects.order_by("date_time").values())
         treatmentQueryset = list(Treatment.objects.filter(display=True).order_by("title").values())
         for dict in appointmentQueryset:
-            dict["date_time"] = dict["date_time"].strftime("%d/%m/%Y, %H:%M")
+            dict["date_time"] = dict["date_time"].isoformat()
             dict["duration"] = int(treatmentQueryset[dict["treatment_name_id"] - 1]["duration"])
-        context = {"planning": json.dumps(planningQueryset), "appointments": appointmentQueryset}
+        context = {"planning": json.dumps(planningQueryset), "appointments": json.dumps(appointmentQueryset)}
         return render(request, "book.html", context=context)
