@@ -1,6 +1,7 @@
+from time import strftime
 from django.shortcuts import render
 from django.views import View
-from .models import Treatment, Planning
+from .models import Appointment, Treatment, Planning
 import json
 
 
@@ -15,6 +16,11 @@ class HomePage(View):
 class BookingModule(View):
 
     def get(self, request):
-        queryset = list(Planning.objects.filter(active=True).order_by("title").values())
-        planning = {"planning": json.dumps(queryset)}
-        return render(request, "book.html", context=planning)
+        planningQueryset = list(Planning.objects.filter(active=True).order_by("title").values())
+        appointmentQueryset = list(Appointment.objects.order_by("date_time").values())
+        treatmentQueryset = list(Treatment.objects.filter(display=True).order_by("title").values())
+        for dict in appointmentQueryset:
+            dict["date_time"] = dict["date_time"].strftime("%d/%m/%Y, %H:%M")
+            dict["duration"] = int(treatmentQueryset[dict["treatment_name_id"] - 1]["duration"])
+        context = {"planning": json.dumps(planningQueryset), "appointments": appointmentQueryset}
+        return render(request, "book.html", context=context)
