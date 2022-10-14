@@ -52,6 +52,19 @@
                             <a href="#" class="nav-link fs-5">Contact</a>
                         </li>
                     </ul>
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        {% if user.is_authenticated %}
+                        <li class="na-item ">
+                            <a href="{% url 'account_logout' %}"
+                                class="nav-link fs-5 text-warning text-decoration-underline">Logout</a>
+                        </li>
+                        {% else %}
+                        <li class="na-item">
+                            <a href="{% url 'account_login' %}"
+                                class="nav-link fs-5 text-warning text-decoration-underline">Login</a>
+                        </li>
+                        {% endif %}
+                    </ul>
                 </div>
             </div>
         </nav>
