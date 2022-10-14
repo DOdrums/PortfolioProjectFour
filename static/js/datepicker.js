@@ -6,10 +6,10 @@ var disabledWeekDaysList = disabledWeekDays.map(function (x) {
 dateToday = new Date()
 var allowTimesFinal = planningJS.allow_times.split(",")
 getBlockedTimesList(dateToday)
-console.log(allowTimesFinal)
 
 function getAllowdTimesList(date) {
   let allowedTimesList = []
+  console.log(date)
   let timeoption = date.split("T").shift()
   timelist = planningJS.allow_times.split(",")
   for (time of timelist) {
@@ -21,7 +21,7 @@ function getAllowdTimesList(date) {
 }
 
 function getBlockedTimesList(selectedDate) {
-  let allowedTimesList = getAllowdTimesList("2022-10-17T09:54:05+00:00")
+  let allowedTimesList = getAllowdTimesList(selectedDate.toISOString())
 
   appointments.forEach(element => {
     appDate = new Date(element.date_time)
@@ -54,15 +54,13 @@ jQuery('#datepicker').datetimepicker({
   inline:true,
   lang:'en',
   todayButton:true,
-  allowTimes: allowTimesFinal, 
+  allowTimes: allowTimesFinal,
   disabledWeekDays: disabledWeekDaysList,
   disabledDates: planningJS.disabled_dates.split(","), formatDate: 'd.m.Y',
   onChangeDateTime: function(dp, $input) {
     let selectedDate = new Date($input.val())
     getBlockedTimesList(selectedDate)
+    $('#datepicker').datetimepicker('setOptions', {allowTimes: allowTimesFinal})
   }
   // Optionally add "allowDates: ["25.10.2022"], formatDate: 'd.m.Y'" , to allow only certain dates. For this to work, disabledDates and disabledWeekDays needs to be off/empty. 
 });
-
-// getBlockedTimesList()
-
