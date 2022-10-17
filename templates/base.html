@@ -56,12 +56,11 @@
                         {% if user.is_authenticated %}
                         <li class="na-item ">
                             <a href="{% url 'account_logout' %}"
-                                class="nav-link fs-5 text-warning text-decoration-underline">Logout</a>
+                                class="nav-link fs-5 btn btn-outline-primary">Logout</a>
                         </li>
                         {% else %}
                         <li class="na-item">
-                            <a href="{% url 'account_login' %}"
-                                class="nav-link fs-5 text-warning text-decoration-underline">Login</a>
+                            <a href="{% url 'account_login' %}" class="nav-link fs-5 btn btn-outline-primary">Login</a>
                         </li>
                         {% endif %}
                     </ul>
