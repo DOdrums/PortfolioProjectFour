@@ -64,6 +64,7 @@ SITE_ID = 1
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+ACCOUNT_FORMS = {'signup': 'salon.forms.CustomSignUpForm'}
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
