@@ -62,10 +62,18 @@ INSTALLED_APPS = [
 
 SITE_ID = 1
 
+# allauth setting
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
-ACCOUNT_FORMS = {'signup': 'salon.forms.CustomSignUpForm'}
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+ACCOUNT_EMAIL_VERIFICATION = "none"
+ACCOUNT_FORMS = {'signup': 'salon.forms.CustomSignUpForm', 'login': 'salon.forms.CustomLoginForm'}
 
+# cripsy forms settings
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
