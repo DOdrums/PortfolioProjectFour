@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
     <header>
         <nav class="navbar navbar-expand-md">
             <div class="container-fluid">
@@ -73,7 +73,7 @@
         {% block content %}
         {% endblock content %}
     </main>
-    <footer class="text-white text-center text-lg-start bg-secondary mt-md-5">
+    <footer class="text-white text-center text-lg-start bg-secondary mt-auto">
         <div class="container pt-5">
             <div class="row">
                 <div class="col-lg-4 mb-4">
