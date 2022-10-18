@@ -1,6 +1,8 @@
 from datetime import timedelta
 from django.contrib import admin
 from .models import Treatment, Planning, Appointment
+from django.contrib.auth.models import User
+from django.contrib.auth.admin import UserAdmin
 
 @admin.register(Treatment)
 class TreatmentAdmin(admin.ModelAdmin):
@@ -34,5 +36,3 @@ class AppointmentAdmin(admin.ModelAdmin):
         duration = int(obj.treatment_name.duration)
         end_time = start_time + timedelta(minutes=duration)
         return end_time
-        
-    

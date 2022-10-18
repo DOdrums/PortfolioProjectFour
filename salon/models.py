@@ -1,4 +1,3 @@
-from email.policy import default
 from django.db import models
 from django.core.validators import RegexValidator
 from cloudinary.models import CloudinaryField
@@ -19,7 +18,7 @@ class Treatment(models.Model):
         return f"{self.title}"
 
 class Appointment(models.Model):
-    treatment_name = models.ForeignKey(Treatment, related_name="appointments", on_delete=models.SET_DEFAULT, default="Treatment")
+    treatment_name = models.ForeignKey(Treatment, related_name="appointments", on_delete=models.PROTECT)
     date_time = models.DateTimeField()
 
 class Planning(models.Model):
@@ -27,9 +26,8 @@ class Planning(models.Model):
     validate_dates = RegexValidator(r'^(\s{0,})(\d{2}\.\d{2}\.\d{4})(,\d{2}\.\d{2}\.\d{4}){1,}(\s){0,}$', 'Please enter comma seperated dates (dd.mm.yyyy), without spaces, like so: 01.11.2028,02.11.2028')
     validate_weekdays = RegexValidator(r'^[0-6](,[0-6])*$', "Please enter valid numbers for weekdays, seperated by comma's. Values from 0-6, starting with sunday at value 0 (0,1,3 for example).")
 
-    title = models.CharField(max_length=150, unique=True) 
+    title = models.CharField(max_length=150, unique=True)
     allow_times = models.TextField(default="", validators=[validate_times])
     disabled_dates = models.TextField(default="", validators=[validate_dates])
     disabled_weekdays = models.TextField(default="", validators=[validate_weekdays])
     active = models.BooleanField(default=False)
-

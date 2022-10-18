@@ -56,11 +56,15 @@ INSTALLED_APPS = [
     'fontawesomefree',
     'django.contrib.staticfiles',
     'cloudinary',
+    'django_rename_app',
     'crispy_forms',
+    'users',
     'salon',
 ]
 
 SITE_ID = 1
+
+AUTH_USER_MODEL = 'users.User'
 
 # allauth setting
 LOGIN_REDIRECT_URL = '/'
