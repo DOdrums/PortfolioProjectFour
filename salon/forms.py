@@ -1,13 +1,26 @@
 from allauth.account.forms import SignupForm, LoginForm
+from django import forms
 
 class CustomSignUpForm(SignupForm):
 
     def __init__(self, *args, **kwargs):
         super(CustomSignUpForm, self).__init__(*args, **kwargs)
+        self.fields['first_name'] = forms.CharField(required=False)
+        self.fields['last_name'] = forms.CharField(required=False)
+
         for fieldname, field in self.fields.items():
             field.widget.attrs.update({
             'class': 'custom-form-field'
         })
+
+    def save(self, request):
+        first_name = self.cleaned_data.pop("first_name")
+        last_name = self.cleaned_data.pop("last_name")
+        
+
+        user = super(CustomSignUpForm, self).save(request)
+        return user
+
 
 class CustomLoginForm(LoginForm):
 
@@ -16,4 +29,4 @@ class CustomLoginForm(LoginForm):
         for fieldname, field in self.fields.items():
             field.widget.attrs.update({
             'class': 'custom-form-field'
-        })
+        }) 
