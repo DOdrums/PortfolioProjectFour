@@ -76,7 +76,7 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 ACCOUNT_EMAIL_VERIFICATION = "none"
-ACCOUNT_FORMS = {'signup': 'salon.forms.CustomSignUpForm', 'login': 'salon.forms.CustomLoginForm'}
+ACCOUNT_FORMS = {'signup': 'users.forms.CustomSignUpForm', 'login': 'users.forms.CustomLoginForm'}
 
 # cripsy forms settings
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

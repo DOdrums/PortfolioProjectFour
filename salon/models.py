@@ -19,7 +19,7 @@ class Treatment(models.Model):
         return f"{self.title}"
 
 class Appointment(models.Model):
-    user = models.ForeignKey(User, related_name="user", on_delete=models.PROTECT, null=True)
+    user = models.ForeignKey(User, related_name="user", on_delete=models.PROTECT, null=True, blank=True)
     treatment_name = models.ForeignKey(Treatment, related_name="appointments", on_delete=models.PROTECT, null=True)
     date_time = models.DateTimeField()
 
