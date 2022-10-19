@@ -7,6 +7,7 @@ class CustomSignUpForm(SignupForm):
         super(CustomSignUpForm, self).__init__(*args, **kwargs)
         self.fields['first_name'] = forms.CharField(required=False)
         self.fields['last_name'] = forms.CharField(required=False)
+        self.fields['phone_number'] = forms.CharField(required=False)
 
         for fieldname, field in self.fields.items():
             field.widget.attrs.update({
@@ -14,8 +15,9 @@ class CustomSignUpForm(SignupForm):
         })
 
     def save(self, request):
-        first_name = self.cleaned_data.pop("first_name")
-        last_name = self.cleaned_data.pop("last_name")
+        first_name = self.cleaned_data["first_name"]
+        last_name = self.cleaned_data["last_name"]
+        phone_number = self.cleaned_data['phone_number']
         
 
         user = super(CustomSignUpForm, self).save(request)

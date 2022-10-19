@@ -67,6 +67,7 @@ SITE_ID = 1
 AUTH_USER_MODEL = 'users.User'
 
 # allauth setting
+ACCOUNT_ADAPTER = 'users.adapter.MyAccountAdapter'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
