@@ -1,6 +1,7 @@
 from time import strftime
 from django.shortcuts import render
 from django.views import View
+from .forms import AppointmentForm
 from .models import Appointment, Treatment, Planning
 import json
 
@@ -22,5 +23,5 @@ class BookingModule(View):
         for dict in appointmentQueryset:
             dict["date_time"] = dict["date_time"].isoformat()
             dict["duration"] = int(treatmentQueryset[dict["treatment_name_id"] - 1]["duration"])
-        context = {"planning": json.dumps(planningQueryset), "appointments": json.dumps(appointmentQueryset)}
+        context = {"planning": json.dumps(planningQueryset), "appointments": json.dumps(appointmentQueryset), "appointment_form": AppointmentForm}
         return render(request, "book.html", context=context)
