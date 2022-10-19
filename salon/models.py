@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import RegexValidator
 from cloudinary.models import CloudinaryField
+from users.models import User
 
 
 class Treatment(models.Model):
@@ -18,7 +19,8 @@ class Treatment(models.Model):
         return f"{self.title}"
 
 class Appointment(models.Model):
-    treatment_name = models.ForeignKey(Treatment, related_name="appointments", on_delete=models.PROTECT)
+    user = models.ForeignKey(User, related_name="user", on_delete=models.PROTECT, null=True)
+    treatment_name = models.ForeignKey(Treatment, related_name="appointments", on_delete=models.PROTECT, null=True)
     date_time = models.DateTimeField()
 
 class Planning(models.Model):
