@@ -9,7 +9,6 @@ getBlockedTimesList(dateToday)
 
 function getAllowdTimesList(date) {
   let allowedTimesList = []
-  console.log(date)
   let timeoption = date.split("T").shift()
   timelist = planningJS.allow_times.split(",")
   for (time of timelist) {
@@ -46,7 +45,6 @@ function convertBlockedTimesList(blockedTimesList) {
       let time = dateTime.getHours() + ":" + dateTime.getMinutes();
       allowTimesFinal.push(time)
     }
-    console.log(allowTimesFinal)
 }
 
 jQuery('#datepicker').datetimepicker({
