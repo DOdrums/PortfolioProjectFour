@@ -1,8 +1,52 @@
 body {
-    background-color: #F3CBBE;
+    background-color: rgba(224, 189, 177, 0.54);
+    font-family: 'Ubuntu', sans-serif;
+    letter-spacing: 1.3px;
+    font-weight: 300;
+}
+
+p {
+    line-height: 28px;
+    color: rgb(115, 115, 115);
+    font-weight: 400;
+}
+
+h1 {
+    font-size: 3.4rem;
+}
+
+h2 {
+    color: #672a2e;
+}
+
+ul li {
+    margin-left: 3px !important;
+}
+
+.navbar {
+    padding: 0;
+    letter-spacing: 2px;
+    font-weight: 300;
+}
+
+.card-title {
+    color: #a17772;
+}
+
+.card-text {
+    line-height: 23px;
+    color: rgb(115, 115, 115);
+    font-weight: 400;
 }
 
 /* homepage */
+
+#slogan {
+    margin-top: -459px !important;
+    margin-left: 204px;
+    color: #a17772;
+
+}
 
 .fa-ul {
     /* class to align items in footer list */
@@ -21,14 +65,14 @@ body {
 }
 
 .hero-outer {
-    height: 543px;
+    height: 608px;
     width: 100%;
 }
 
 .hero-image {
-    background: url(https://res.cloudinary.com/dirkornee/image/upload/v1666012817/hero-image_fzvujo.jpg) center center;
-    height: 535px;
-    margin-top: -118px;
+    background: url(https://res.cloudinary.com/dirkornee/image/upload/v1666012817/hero-image_fzvujo.jpg) 26%;
+    height: 613px;
+    margin-top: -99px;
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -40,6 +84,16 @@ body {
     --bs-btn-hover-border-color: #A17772;
     --bs-btn-active-bg: #672A2E;
     --bs-btn-active-border-color: #672A2E;
+}
+
+.btn-login {
+    --bs-btn-color: #BC8180;
+    --bs-btn-border-color: rgba(187, 128, 127, 0.83);
+    --bs-btn-hover-bg: #BC8180;
+    --bs-btn-hover-border-color: #BC8180;
+    --bs-btn-active-bg: #BC8180;
+    --bs-btn-active-border-color: #BC8180;
+    border-radius: 20%;
 }
 
 .custom-form-field {
@@ -62,4 +116,20 @@ body {
         width: inherit;
     }
 
+    .text-nowrap {
+        white-space: normal !important;
+    }
+
+    /* make hero image fit mobile */
+    .hero-outer {
+        height: 532px;
+    }
+
+    .hero-image {
+        background: url(https://res.cloudinary.com/dirkornee/image/upload/v1666012817/hero-image_fzvujo.jpg) 41%;
+        height: 525px;
+        margin-top: -99px;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
 }

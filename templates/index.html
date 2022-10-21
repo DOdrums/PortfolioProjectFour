@@ -4,16 +4,34 @@
 <!-- hero image -->
 <section class="hero-outer">
     <div class="hero-image"></div>
-</section>
-<div class="container">
-    <div class="row">
-        <div class="col-3 text-center">
-            <button class="btn btn-secondary btn-lg btn-card d-flex mx-auto justify-content-center"
-                style="margin-top: -112px">Book
-                Now!</button>
+    <div class="container" style="margin-left: 0px;">
+        <div class="row" id="slogan">
+            <div class="col-5">
+                <div class="ml-5">
+                    <h1>
+                        Pick a Style.
+                    </h1>
+                    <h1>
+                        Sit Back.
+                    </h1>
+                    <h1>
+                        Relax.
+                    </h1>
+                </div>
+            </div>
         </div>
     </div>
-</div>
+    <div class="container" style="margin-top: 108px; margin-left: 60px;">
+        <div class="row">
+            <div class="col-3">
+                <button class=" btn btn-secondary btn-lg btn-card d-flex mx-auto justify-content-center"
+                    style="font-size: 30px;">Book
+                    Now!</button>
+            </div>
+        </div>
+    </div>
+</section>
+
 
 <section>
     <div class="container">
@@ -28,7 +46,9 @@
     <div class="container">
         <div class="row mx-2 p-lg-5">
             <div class="col-12 col-md-6 mt-xl-5 p-lg-5">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia dolor sit debitis veritatis tempore
+                <h2 class="mb-5">Discover NailsbyFaar</h2>
+                <p class="fs-6">Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia dolor sit debitis
+                    veritatis tempore
                     earum atque, id aperiam labore! Itaque ut quo quis provident hic mollitia illum alias. Excepturi,
                     assumenda. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus similique, nesciunt
                     aspernatur totam quaerat cumque alias repudiandae voluptates odit ullam vitae sapiente aperiam
@@ -53,7 +73,7 @@
         <div class="card col-sm-12 col-md m-xl-5 m-lg-2 m-md-2 mb-3">
             <img src="{{ treatment.image.url }}" alt="image of nail treatment" class="card-img-top">
             <div class="card-body">
-                <h5 class="card-title">{{ treatment.appointment_type }}</h5>
+                <h4 class="card-title mb-3 mt-1">{{ treatment.appointment_type }}</h4>
                 <p class="card-text">{{ treatment.short_description }}</p>
                 <a href="#" class="btn btn-secondary btn-lg col-12 btn-card">Book Now</a>
             </div>
