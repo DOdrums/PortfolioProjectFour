@@ -13,6 +13,7 @@ class Treatment(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     duration = models.DecimalField(max_digits=3, decimal_places=0)
     display = models.BooleanField(default=False)
+    active = models.BooleanField(default=False)
 
     def __str__(self):
         #  Returns a string of title of treatment
@@ -24,7 +25,7 @@ class Appointment(models.Model):
     first_name = models.CharField(max_length=254, null=True, blank=True)
     last_name = models.CharField(max_length=254, null=True, blank=True)
     phone_number = models.CharField(max_length=16, null=True, blank=True)
-    treatment_name = models.ForeignKey(Treatment, related_name="appointments", on_delete=models.PROTECT, null=True)
+    treatment_name = models.ForeignKey(Treatment, related_name="treatment_name", on_delete=models.PROTECT, null=True)
     date_time = models.DateTimeField()
 
 class Planning(models.Model):
