@@ -3,6 +3,11 @@ var disabledWeekDaysList = disabledWeekDays.map(function (x) {
   return parseInt(x, 10)
 })
 
+document.getElementById('id_treatment_name').addEventListener('change', setTreatment, true);
+function setTreatment(e) {
+  console.log(e.target.value)
+}
+
 dateToday = new Date()
 var allowTimesFinal = planningJS.allow_times.split(",")
 getBlockedTimesList(dateToday)
