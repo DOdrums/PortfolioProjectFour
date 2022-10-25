@@ -5,7 +5,8 @@ class AppointmentForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(AppointmentForm, self).__init__(*args, **kwargs)
         treatments = Treatment.objects.filter(active=True).order_by("title").values()
-        treatments_tuples = [(str(i["id"]) + "," + str(i["duration"]), i["title"] + " - " + str(i["duration"]) + " min - €" + str(i["price"])) for i in treatments]
+        treatments_tuples = [("", "---------------")]
+        treatments_tuples = treatments_tuples + [(str(i["id"]) + "," + str(i["duration"]), i["title"] + " - " + str(i["duration"]) + " min - €" + str(i["price"])) for i in treatments]
         self.fields['treatment_name'] = forms.ChoiceField(choices=treatments_tuples)
         for fieldname, field in self.fields.items():
             field.widget.attrs.update({
