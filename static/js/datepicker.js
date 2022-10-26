@@ -7,16 +7,18 @@ var disabledWeekDaysList = disabledWeekDays.map(function (x) {
 var selectedDate = new Date()
 var allowTimesFinal = planningJS.allow_times.split(",")
 // get allowedTimes entered in admin panel by site owner.
-var endTime = allowTimesFinal[allowTimesFinal.length - 1]
+
 // get endTime, the time at which the workday ends.
+var selectedTreatmentDuration = 180
+
 getBlockedTimesList(selectedDate)
 // get allowedTimes with currently booked appointments blocking times.
 // this is done per day, so the list changes when a new date is selected.
-var selectedTreatmentDuration = 180
 
 document.getElementById('id_treatment_name').addEventListener('change', setTreatment, true);
 // get value from selected treatment option and store duration value in selectedTreatmentDuration
 function setTreatment(e) {
+  document.getElementById('datepicker-cover').style.display = "none";
   selectedTreatmentDuration = parseInt(e.target.value.split(",")[1])
   getBlockedTimesList(selectedDate)
 }
@@ -40,21 +42,29 @@ function getBlockedTimesList(selectedDate) {
   // duration, making sure the appointment can't be scheduled with an end time
   // later than the registered endtime by sitowner.
   let allowedTimesList = getAllowdTimesListWithDate(selectedDate.toISOString())
+  var workDayEndTime = allowedTimesList[allowedTimesList.length - 1]
 
   appointments.forEach(element => {
+    // loop over all appointments in the database
     appDate = new Date(element.date_time)
 
     if (appDate.toDateString() === selectedDate.toDateString()) {
+      // select any appointments that fall on the selected date
       let appStartTime = appDate
       let appEndTime = new Date(appDate.getTime() + element.duration*60000)
       for (time of allowedTimesList) {
-        if (appStartTime <= time && time < appEndTime) {
+        // loop over all the times to see which times should be bookable
+        let treatmentEndTime = new Date(time.getTime() + selectedTreatmentDuration*60000)
+        if (treatmentEndTime > workDayEndTime) {
+          // first we block off any times that cause the selected treatment to run later than
+          // the end of the workday
           allowedTimesList = allowedTimesList.filter(e => e !== time);
         }
-        let treatmentEndTime = new Date(time.getTime() + selectedTreatmentDuration*60000)
         if (time < appEndTime) {
+          // then we select all the times before the end of a appointment
           if (treatmentEndTime > appStartTime) {
-            console.log(time)
+            // then we see which of those times would make the selected appointment run late
+            allowedTimesList = allowedTimesList.filter(e => e !== time);
           }
         }
       }
@@ -74,6 +84,7 @@ function convertBlockedTimesList(blockedTimesList) {
     for (dateTime of blockedTimesList) {
       let time = dateTime.getHours() + ":" + dateTime.getMinutes();
       allowTimesFinal.push(time)
+      $('#datepicker').datetimepicker('setOptions', {allowTimes: allowTimesFinal})
     }
 }
 
@@ -88,7 +99,6 @@ jQuery('#datepicker').datetimepicker({
   onChangeDateTime: function(dp, $input) {
     selectedDate = new Date($input.val())
     getBlockedTimesList(selectedDate)
-    $('#datepicker').datetimepicker('setOptions', {allowTimes: allowTimesFinal})
   }
   // Optionally add "allowDates: ["25.10.2022"], formatDate: 'd.m.Y'" , to allow only certain dates. For this to work, disabledDates and disabledWeekDays needs to be off/empty. 
 });
