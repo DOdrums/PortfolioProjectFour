@@ -37,7 +37,7 @@ function getAllowdTimesListWithDate(date) {
 }
 
 function getBlockedTimesList(selectedDate) {
-  // compares times in allowedTimes with appointments. Block out any
+  // Compares times in allowedTimes with appointments. Block out any
   // times that appointments are scheduled. Also checks for selected treatments
   // duration, making sure the appointment can't be scheduled with an end time
   // later than the registered endtime by sitowner.
@@ -87,18 +87,27 @@ function convertBlockedTimesList(blockedTimesList) {
       $('#datepicker').datetimepicker('setOptions', {allowTimes: allowTimesFinal})
     }
 }
+function setSelectedDate(date) {
+  date.toISOString
+  $('#id_date_time').val(date)
+  console.log(date)
+}
 
 jQuery('#datepicker').datetimepicker({
   format:'c',
   inline:true,
   lang:'en',
   todayButton:true,
+  minDate: new Date,
   allowTimes: allowTimesFinal,
   disabledWeekDays: disabledWeekDaysList,
   disabledDates: planningJS.disabled_dates.split(","), formatDate: 'd.m.Y',
   onChangeDateTime: function(dp, $input) {
     selectedDate = new Date($input.val())
     getBlockedTimesList(selectedDate)
-  }
+    setSelectedDate(selectedDate)
+  },
   // Optionally add "allowDates: ["25.10.2022"], formatDate: 'd.m.Y'" , to allow only certain dates. For this to work, disabledDates and disabledWeekDays needs to be off/empty. 
 });
+
+
