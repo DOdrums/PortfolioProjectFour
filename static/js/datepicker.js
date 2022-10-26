@@ -3,16 +3,24 @@ var disabledWeekDaysList = disabledWeekDays.map(function (x) {
   return parseInt(x, 10)
 })
 
-document.getElementById('id_treatment_name').addEventListener('change', setTreatment, true);
-function setTreatment(e) {
-  console.log(e.target.value)
-}
 
 dateToday = new Date()
 var allowTimesFinal = planningJS.allow_times.split(",")
+// get allowedTimes entered in admin panel by site owner
 getBlockedTimesList(dateToday)
+// get allowedTimes with currently booked appointments blocking times.
+// this is done per day, so the list changes when a new date is selected.
+var selectedTreatmentDuration = 180
 
-function getAllowdTimesList(date) {
+document.getElementById('id_treatment_name').addEventListener('change', setTreatment, true);
+// get value from selected treatment option and store duration value in selectedTreatmentDuration
+function setTreatment(e) {
+  selectedTreatmentDuration = parseInt(e.target.value.split(",")[1])
+  console.log(selectedTreatmentDuration)
+}
+
+function getAllowdTimesListWithDate(date) {
+  // get allowed times with date appended, for comparing times
   let allowedTimesList = []
   let timeoption = date.split("T").shift()
   timelist = planningJS.allow_times.split(",")
@@ -25,7 +33,11 @@ function getAllowdTimesList(date) {
 }
 
 function getBlockedTimesList(selectedDate) {
-  let allowedTimesList = getAllowdTimesList(selectedDate.toISOString())
+  // compares times in allowedTimes with appointments. Block out any
+  // times that appointments are scheduled. Also checks for selected treatments
+  // duration, making sure the appointment can't be scheduled with an end time
+  // later than the registered endtime by sitowner.
+  let allowedTimesList = getAllowdTimesListWithDate(selectedDate.toISOString())
 
   appointments.forEach(element => {
     appDate = new Date(element.date_time)
@@ -45,6 +57,8 @@ function getBlockedTimesList(selectedDate) {
 }
 
 function convertBlockedTimesList(blockedTimesList) {
+  // convert allowedTimesList back to the format for
+  // usage in datepicker.
   allowTimesFinal.length = 0
     for (dateTime of blockedTimesList) {
       let time = dateTime.getHours() + ":" + dateTime.getMinutes();
