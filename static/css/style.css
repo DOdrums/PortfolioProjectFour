@@ -115,13 +115,13 @@ ul li {
 
 /* booking page */
 
-#datepicker-cover {
+.datepicker-cover {
     display: block;
     position: relative;
     margin-top: -244px;
     height: 237px;
     background-color: #a17772a1;
-    width: 307px;
+    width: 388px;
 }
 
 #datepicker-right {
@@ -130,6 +130,10 @@ ul li {
 
 #datepicker-left {
     display: none;
+}
+
+.datepicker-center {
+    width: 389px;
 }
 
 /* Devices 992px and down */
@@ -181,5 +185,16 @@ ul li {
 
     #datepicker-right {
         display: none;
+    }
+}
+
+/* Devices 413px and down */
+@media (max-width: 413px) {
+    .datepicker-center {
+        width: 100%;
+    }
+
+    .datepicker-cover {
+        width: 100%;
     }
 }

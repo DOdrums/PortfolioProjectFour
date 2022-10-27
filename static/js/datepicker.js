@@ -31,7 +31,8 @@ getBlockedTimesList(selectedDate)
 document.getElementById('id_treatment_name').addEventListener('change', setTreatment, true);
 // get value from selected treatment option and store duration value in selectedTreatmentDuration
 function setTreatment(e) {
-  document.getElementById('datepicker-cover').style.display = "none";
+  document.getElementById('datepicker-cover-left').style.display = "none";
+  document.getElementById('datepicker-cover-right').style.display = "none";
   selectedTreatmentDuration = parseInt(e.target.value.split(",")[1])
   getBlockedTimesList(selectedDate)
 }

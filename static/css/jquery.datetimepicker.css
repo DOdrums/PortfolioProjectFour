@@ -55,6 +55,7 @@
 }
 
 .xdsoft_datetimepicker.xdsoft_inline {
+	width: 389px;
 	display: inline-block;
 	position: static;
 	box-shadow: none;
@@ -78,7 +79,7 @@
 }
 
 .xdsoft_datetimepicker .xdsoft_datepicker {
-	width: 224px;
+	width: 305px;
 	float: left;
 	margin-left: 8px;
 }
@@ -613,4 +614,19 @@
 	/* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f4f8fa', endColorstr='#FFF', GradientType=0);
 	/* IE6-9 */
+}
+
+/* For screen sizes 413px and down */
+@media (max-width: 413px) {
+	.xdsoft_datetimepicker.xdsoft_inline {
+		width: 100%;
+	}
+
+	.xdsoft_datetimepicker .xdsoft_datepicker {
+		width: 74%;
+	}
+
+	.xdsoft_datetimepicker .xdsoft_monthpicker {
+		width: 104%;
+	}
 }
