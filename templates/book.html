@@ -7,10 +7,10 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-12">
-            <form method="post">
+            <form method="post" id="booking_form">
                 {% csrf_token %}
                 {{ appointment_form | crispy }}
-                <div class="my-4">
+                <div class=" my-4">
                     <button type="submit" class="btn btn-secondary btn-card btn-lg">Book</button>
                 </div>
             </form>

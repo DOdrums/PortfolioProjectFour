@@ -3,6 +3,12 @@ var disabledWeekDaysList = disabledWeekDays.map(function (x) {
   return parseInt(x, 10)
 })
 
+document.getElementById('id_date_time').disabled = true;
+document.getElementById('booking_form').addEventListener("submit", submitForm) 
+function submitForm() {
+  document.getElementById('id_date_time').disabled = false;
+  console.log("submitted")
+}
 
 var selectedDate = new Date()
 var allowTimesFinal = planningJS.allow_times.split(",")
@@ -88,15 +94,15 @@ function convertBlockedTimesList(blockedTimesList) {
     }
 }
 function setSelectedDate(date) {
-  date.toISOString
-  $('#id_date_time').val(date)
-  console.log(date)
+  dateString = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()} ${date.getHours()}:${date.getMinutes()<10?'0':""}${date.getMinutes()}`
+  $('#id_date_time').val(dateString)
 }
 
 jQuery('#datepicker').datetimepicker({
   format:'c',
   inline:true,
   lang:'en',
+  defaultSelect:false,
   todayButton:true,
   minDate: new Date,
   allowTimes: allowTimesFinal,
@@ -105,8 +111,11 @@ jQuery('#datepicker').datetimepicker({
   onChangeDateTime: function(dp, $input) {
     selectedDate = new Date($input.val())
     getBlockedTimesList(selectedDate)
-    setSelectedDate(selectedDate)
   },
+  onSelectTime: function(current_time, $input) {
+    selectedDate = new Date($input.val())
+    setSelectedDate(selectedDate)
+  }
   // Optionally add "allowDates: ["25.10.2022"], formatDate: 'd.m.Y'" , to allow only certain dates. For this to work, disabledDates and disabledWeekDays needs to be off/empty. 
 });
 
