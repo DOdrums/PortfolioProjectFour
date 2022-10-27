@@ -124,6 +124,13 @@ ul li {
     width: 307px;
 }
 
+#datepicker-right {
+    display: block;
+}
+
+#datepicker-left {
+    display: none;
+}
 
 /* Devices 992px and down */
 @media (max-width: 992px) {
@@ -163,5 +170,16 @@ ul li {
     #book-button {
         margin-top: -398px;
         margin-left: -31px;
+    }
+}
+
+/* Devices 768px and down */
+@media (max-width: 768px) {
+    #datepicker-left {
+        display: block;
+    }
+
+    #datepicker-right {
+        display: none;
     }
 }

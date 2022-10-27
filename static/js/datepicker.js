@@ -1,3 +1,10 @@
+if (document.documentElement.clientWidth < 768) {
+  document.getElementById('datepicker-enable-right').id = 'datepicker'
+} else {
+  document.getElementById('datepicker-enable-left').id = 'datepicker'
+}
+
+
 var disabledWeekDays = planningJS.disabled_weekdays.split(",")
 var disabledWeekDaysList = disabledWeekDays.map(function (x) {
   return parseInt(x, 10)
