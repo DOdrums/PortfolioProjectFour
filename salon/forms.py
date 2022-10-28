@@ -33,7 +33,6 @@ class AppointmentForm(forms.ModelForm):
         treatment_id = int(treatment_value[0])
         treatment_name = Treatment.objects.get(id=treatment_id)
         cleaned_data["treatment_name"] = treatment_name
-        print(cleaned_data)
         cleaned_data["date_time"] = datetime.strptime(cleaned_data["date_time"], '%d-%m-%Y %H:%M')
         return cleaned_data
         
