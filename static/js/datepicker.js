@@ -130,9 +130,14 @@ jQuery('#datepicker').datetimepicker({
     if(timePicked) {
       getBlockedTimesList(selectedDate);
       time = `${selectedDate.getHours()}:${selectedDate.getMinutes()}`
-      if(!(parseInt(time) in allowTimesFinal)) {
-        setSelectedDate(selectedDate)
+      if(!(allowTimesFinal.includes(time.toString()))) {
         clearSelectedDate()
+        console.log(time)
+        console.log(allowTimesFinal)
+      } else {
+        setSelectedDate(selectedDate)
+        console.log(time)
+        console.log(allowTimesFinal)
       }
     }
   },
