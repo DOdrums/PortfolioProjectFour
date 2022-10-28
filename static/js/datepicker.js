@@ -4,7 +4,8 @@ if (document.documentElement.clientWidth < 768) {
   document.getElementById('datepicker-enable-left').id = 'datepicker'
 }
 
-
+var timePicked = false
+var datePicked = false
 var disabledWeekDays = planningJS.disabled_weekdays.split(",")
 var disabledWeekDaysList = disabledWeekDays.map(function (x) {
   return parseInt(x, 10)
@@ -14,7 +15,6 @@ document.getElementById('id_date_time').disabled = true;
 document.getElementById('booking_form').addEventListener("submit", submitForm) 
 function submitForm() {
   document.getElementById('id_date_time').disabled = false;
-  console.log("submitted")
 }
 
 var selectedDate = new Date()
@@ -106,6 +106,10 @@ function setSelectedDate(date) {
   $('#id_date_time').val(dateString)
 }
 
+function clearSelectedDate() {
+  $('#id_date_time').val("")
+}
+
 jQuery('#datepicker').datetimepicker({
   format:'c',
   inline:true,
@@ -117,12 +121,27 @@ jQuery('#datepicker').datetimepicker({
   disabledWeekDays: disabledWeekDaysList,
   disabledDates: planningJS.disabled_dates.split(","), formatDate: 'd.m.Y',
   onChangeDateTime: function(dp, $input) {
-    selectedDate = new Date($input.val())
-    getBlockedTimesList(selectedDate)
+    selectedDate = new Date($input.val());
+    getBlockedTimesList(selectedDate);
+  },
+  onSelectDate: function(ct,$i) {
+    selectedDate = new Date($i.val());
+    datePicked = true
+    if(timePicked) {
+      getBlockedTimesList(selectedDate);
+      time = `${selectedDate.getHours()}:${selectedDate.getMinutes()}`
+      if(!(parseInt(time) in allowTimesFinal)) {
+        setSelectedDate(selectedDate)
+        clearSelectedDate()
+      }
+    }
   },
   onSelectTime: function(current_time, $input) {
-    selectedDate = new Date($input.val())
-    setSelectedDate(selectedDate)
+    timePicked = true;
+    selectedDate = new Date($input.val());
+    if(datePicked) {
+      setSelectedDate(selectedDate);
+    }
   }
   // Optionally add "allowDates: ["25.10.2022"], formatDate: 'd.m.Y'" , to allow only certain dates. For this to work, disabledDates and disabledWeekDays needs to be off/empty. 
 });
