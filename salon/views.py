@@ -1,4 +1,5 @@
 from time import strftime
+from datetime import datetime, timedelta
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views import View
@@ -18,8 +19,11 @@ class HomePage(View):
 class BookingModule(View):
 
     def get(self, request):
+        today = datetime.today()
+        yesterday = today - timedelta(days=1)
+        future = today + timedelta (days=99999)
         planningQueryset = list(Planning.objects.filter(active=True).order_by("title").values())
-        appointmentQueryset = list(Appointment.objects.order_by("date_time").values())
+        appointmentQueryset = list(Appointment.objects.filter(date_time__gt=yesterday).order_by("date_time").values())
         for dict in appointmentQueryset:
             dict["date_time"] = dict["date_time"].isoformat()
             dict["duration"] = int(Treatment.objects.get(id=dict['treatment_name_id']).duration)
