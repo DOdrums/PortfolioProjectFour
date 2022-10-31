@@ -1,10 +1,27 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 
 {% block content %}
 <div class="container mt-md-5 my-2">
     <div class="row">
-        <div class="col-md-10 mt-3 offset-md-2">
-            <h2>This page works!</h2>
+        <div class="col-md-6 mt-3">
+            <h2>Hi {{ request.user.first_name}}!</h2>
+            <form action="POST" class="mt-4">
+                <fieldset disabled="disabled">
+                    {% csrf_token %}
+                    {{ user_form | crispy }}
+                </fieldset>
+            </form>
+        </div>
+        <div class="col-md-6 mt-3">
+            <h2>Your Appointments</h2>
+            <div class="mt-4">
+                {% for appointment in appointments%}
+                <p>{{ appointment.treatment_name }}</p>
+                <p>{{ appointment.date_time }}</p>
+                <p>{{ appointment.duration }} min</p>
+                {% endfor %}
+            </div>
         </div>
     </div>
 </div>

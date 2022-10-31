@@ -1,6 +1,8 @@
 from allauth.account.forms import SignupForm, LoginForm
 from django import forms
 
+from users.models import User
+
 class CustomSignUpForm(SignupForm):
 
     def __init__(self, *args, **kwargs):
@@ -32,3 +34,16 @@ class CustomLoginForm(LoginForm):
             field.widget.attrs.update({
             'class': 'custom-form-field'
         }) 
+
+class EditUserForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(EditUserForm, self).__init__(*args, **kwargs)
+        for fieldname, field in self.fields.items():
+            field.widget.attrs.update({
+            'class': 'custom-form-field'
+        }) 
+    
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'email', 'phone_number')
