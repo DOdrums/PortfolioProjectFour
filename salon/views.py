@@ -42,14 +42,17 @@ class BookingModule(View):
         form = AppointmentForm(request.POST)
         if form.is_valid():
             form.save()
-            print("valid")
             return HttpResponseRedirect("thankyou")
         else:
             form = AppointmentForm()
-            print("not valid")
-            return HttpResponseRedirect("thankyou")
+            return HttpResponseRedirect("book-error")
 
 class ThankYou(View):
 
     def get(self, request):
         return render(request, "booked.html")
+
+class BookError(View):
+
+    def get(self, request):
+        return render(request, "book-error.html")
