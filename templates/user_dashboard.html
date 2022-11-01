@@ -3,8 +3,8 @@
 
 {% block content %}
 <div class="container mt-md-5 my-2">
-    <div class="row">
-        <div class="col-md-6 mt-3">
+    <div class="row mx-auto w-100 justify-content-center">
+        <div class="col-md-5 m-4 py-3 px-4 user-data-box">
             <h2>Hi {{ request.user.first_name}}!</h2>
             <form action="POST" class="mt-4">
                 <fieldset disabled="disabled">
@@ -13,13 +13,28 @@
                 </fieldset>
             </form>
         </div>
-        <div class="col-md-6 mt-3">
+        <div class="col-md-5 m-4 py-3 px-4 user-data-box">
             <h2>Your Appointments</h2>
-            <div class="mt-4">
-                {% for appointment in appointments%}
-                <p>{{ appointment.treatment_name }}</p>
-                <p>{{ appointment.date_time }}</p>
-                <p>{{ appointment.duration }} min</p>
+            <div class="mt-4 accordion accordion-flush" id="accordionFlushAppointment">
+                {% for appointment in appointments %}
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-heading-{{ forloop.counter }}">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapse-{{ forloop.counter }}" aria-expanded="false"
+                            aria-controls="flush-collapse-{{ forloop.counter }}">{{ appointment.treatment_name }} -
+                            {{ appointment.date_time }}</button>
+                    </h2>
+                    <div id="flush-collapse-{{ forloop.counter }}" class="accordion-collapse collapse pt-3 pb-1 px-3"
+                        aria-labelledby="flush-heading-{{ forloop.counter }}"
+                        data-bs-parent="#accordionFlushAppointment">
+                        <h6>Treatment:</h6>
+                        <p>{{ appointment.treatment_name }}</p>
+                        <h6>Date:</h6>
+                        <p>{{ appointment.date_time }}</p>
+                        <h6>Duration:</h6>
+                        <p>{{ appointment.duration }} min</p>
+                    </div>
+                </div>
                 {% endfor %}
             </div>
         </div>

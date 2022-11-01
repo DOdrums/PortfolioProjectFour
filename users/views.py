@@ -20,10 +20,10 @@ class Dashboard(View):
         appointmentQueryset1 = Appointment.objects.filter(user__email=request.user.email).order_by("date_time").values()
         appointmentQueryset2 = Appointment.objects.filter(email=request.user.email).order_by("date_time").values()
         appointmentQueryset = list(appointmentQueryset1 | appointmentQueryset2)
+        print(appointmentQueryset)
         for dict in appointmentQueryset:
             dict["date_time"] = dict["date_time"].isoformat()
             dict["duration"] = int(Treatment.objects.get(id=dict['treatment_name_id']).duration)
             dict["treatment_name"] = Treatment.objects.get(id=dict['treatment_name_id']).title
-        print(appointmentQueryset)
         context = {"user_form": user_form, "appointments": appointmentQueryset}
         return render(request, "user_dashboard.html", context=context)

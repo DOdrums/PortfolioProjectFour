@@ -144,6 +144,13 @@ ul li {
     width: 389px;
 }
 
+/* user dashboard */
+
+.user-data-box {
+    background: #e4b3aa;
+    border-radius: 3%;
+}
+
 /* Devices 992px and down */
 @media (max-width: 992px) {
 
