@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta
 from django.shortcuts import render
 from django.views import View
 from users.forms import EditUserForm
@@ -15,8 +16,10 @@ class Dashboard(View):
         
         user_form = EditUserForm(initial=user_dict)
 
-        appointmentQueryset1 = Appointment.objects.filter(user__email=request.user.email).order_by("date_time").values()
-        appointmentQueryset2 = Appointment.objects.filter(email=request.user.email).order_by("date_time").values()
+        yesterday = datetime.today() - timedelta(days=1)
+
+        appointmentQueryset1 = Appointment.objects.filter(date_time__gt=yesterday).filter(user__email=request.user.email).order_by("date_time").values()
+        appointmentQueryset2 = Appointment.objects.filter(date_time__gt=yesterday).filter(email=request.user.email).order_by("date_time").values()
         appointmentQueryset = list(appointmentQueryset1 | appointmentQueryset2)
         print(appointmentQueryset)
         for dict in appointmentQueryset:
