@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+
+{% load static %}
 {% load crispy_forms_tags %}
 
 {% block content %}
@@ -10,13 +12,13 @@
         <div class="col-md-5 m-4 py-3 px-md-4 user-data-box">
             <h4>Personal info</h4>
             <form action="POST" class="mt-4">
-                <fieldset disabled="disabled">
-                    {% csrf_token %}
-                    {{ user_form | crispy }}
-                </fieldset>
+                {% csrf_token %}
+                {{ user_form | crispy }}
                 <div class="row">
-                    <button class="btn btn-secondary btn-card btn-lg col-5 disabled my-2 ms-3">Save</button>
-                    <button type="button" class="btn btn-secondary btn-card btn-lg col-5 my-2 ms-3">Edit</button>
+                    <button class="btn btn-secondary btn-card btn-lg col-5 disabled my-2 ms-3"
+                        id="save-user-data">Save</button>
+                    <button type="button" onClick="editUserData()"
+                        class="btn btn-secondary btn-card btn-lg col-5 my-2 ms-3" id="edit-user-data">Edit</button>
                 </div>
             </form>
         </div>
@@ -55,4 +57,6 @@
         </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="{% static 'js/dashboard.js' %}"></script>
 {% endblock %}
