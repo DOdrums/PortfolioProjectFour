@@ -4,17 +4,24 @@
 {% block content %}
 <div class="container mt-md-5 my-2">
     <div class="row mx-auto w-100 justify-content-center">
-        <div class="col-md-5 m-4 py-3 px-4 user-data-box">
-            <h2>Hi {{ request.user.first_name}}!</h2>
+        <div class="text-center mb-3">
+            <h2>Hi, {{ request.user.first_name}}.</h2>
+        </div>
+        <div class="col-md-5 m-4 py-3 px-md-4 user-data-box">
+            <h4>Personal info</h4>
             <form action="POST" class="mt-4">
                 <fieldset disabled="disabled">
                     {% csrf_token %}
                     {{ user_form | crispy }}
                 </fieldset>
+                <div class="row">
+                    <button class="btn btn-secondary btn-card btn-lg col-5 disabled my-2 ms-3">Save</button>
+                    <button type="button" class="btn btn-secondary btn-card btn-lg col-5 my-2 ms-3">Edit</button>
+                </div>
             </form>
         </div>
-        <div class="col-md-5 m-4 py-3 px-4 user-data-box">
-            <h2>Your Appointments</h2>
+        <div class="col-md-5 m-4 py-3 px-md-4 user-data-box">
+            <h4>Your appointments</h4>
             <div class="mt-4 accordion accordion-flush" id="accordionFlushAppointment">
                 {% for appointment in appointments %}
                 <div class="accordion-item">
@@ -34,6 +41,13 @@
                         <p>{{ appointment.date_time }}</p>
                         <h6>Duration:</h6>
                         <p>{{ appointment.duration }} min</p>
+                        <div class="row justify-content-center">
+                            <a href="#" class="nav-link fs-5 btn btn-secondary btn-card col-5 m-2 p-1 text-white">Change
+                                Date
+                            </a>
+                            <a href="#" class="nav-link fs-5 btn btn-secondary btn-card col-5 m-2 p-1 text-white">Cancel
+                            </a>
+                        </div>
                     </div>
                 </div>
                 {% endfor %}
