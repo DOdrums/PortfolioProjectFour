@@ -19,6 +19,14 @@ h2 {
     color: #672a2e;
 }
 
+h5 {
+    color: #4b1c24;
+}
+
+h6 {
+    color: #212529;
+}
+
 a {
     color: #BC8180;
 }
@@ -154,6 +162,12 @@ ul li {
 #accordionFlushAppointment {
     overflow: hidden;
     border-radius: 2%;
+
+    --bs-accordion-bg: #fff7f7;
+    --bs-accordion-border-color: #c2c2c2;
+    --bs-accordion-btn-color: unset;
+    --bs-accordion-active-bg: #bc8180;
+    --bs-accordion-active-color: white;
 }
 
 /* Devices 992px and down */
