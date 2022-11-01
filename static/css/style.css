@@ -151,6 +151,11 @@ ul li {
     border-radius: 3%;
 }
 
+#accordionFlushAppointment {
+    overflow: hidden;
+    border-radius: 2%;
+}
+
 /* Devices 992px and down */
 @media (max-width: 992px) {
 

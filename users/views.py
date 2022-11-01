@@ -9,10 +9,8 @@ class Dashboard(View):
     def get(self, request):
         user_dict = {}
         if request.user.is_authenticated:
-            print("logged in")
             user_dict = {'email': request.user.email, 'first_name': request.user.first_name, 'last_name': request.user.last_name, 'phone_number': request.user.phone_number}
         else:
-            print("not logged in")
             user_dict = {}
         
         user_form = EditUserForm(initial=user_dict)
@@ -22,7 +20,7 @@ class Dashboard(View):
         appointmentQueryset = list(appointmentQueryset1 | appointmentQueryset2)
         print(appointmentQueryset)
         for dict in appointmentQueryset:
-            dict["date_time"] = dict["date_time"].isoformat()
+            dict["date_time"] = dict["date_time"].strftime("%A %d %B %Y, %H:%M")
             dict["duration"] = int(Treatment.objects.get(id=dict['treatment_name_id']).duration)
             dict["treatment_name"] = Treatment.objects.get(id=dict['treatment_name_id']).title
         context = {"user_form": user_form, "appointments": appointmentQueryset}
