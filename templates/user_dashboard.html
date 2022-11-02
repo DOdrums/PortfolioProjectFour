@@ -8,11 +8,20 @@
     <div class="row mx-auto w-100 justify-content-center">
         <div class="text-center mb-3">
             <h2>Hi, {{ request.user.first_name}}.</h2>
-            {% if saved %}
-            <h2>SAVED</h2>
-            {% endif %}
         </div>
         <div class="col-md-5 m-4 py-3 px-md-4 user-data-box">
+            {% if saved %}
+            <div class="alert alert-success alert-dismissible" id="alert-message" role="alert">
+                <div>Personal info updated!</div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endif %}
+            {% if not_saved %}
+            <div class="alert alert-danger alert-dismissible" id="alert-message" role="alert">
+                <div>Something went wrong, try again.</div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endif %}
             <h4>Personal info</h4>
             <form method="POST" class="mt-4" id="user-data-form">
                 {% csrf_token %}

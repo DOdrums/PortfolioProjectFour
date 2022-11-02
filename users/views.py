@@ -55,8 +55,12 @@ class Dashboard(View):
                     user_dict = {}
                 
                 user_form = EditUserForm(initial=user_dict)
-                
+
                 context = {"user_form": user_form, "appointments": appointmentQueryset, "saved": True}
                 return render(request, "user_dashboard.html", context=context)
             else:
-                return HttpResponseRedirect("dashboard")
+                user_dict = {'email': request.user.email, 'first_name': request.user.first_name, 'last_name': request.user.last_name, 'phone_number': request.user.phone_number}
+                user_form = EditUserForm(initial=user_dict)
+
+                context = {"user_form": user_form, "appointments": appointmentQueryset, "not_saved": True}
+                return render(request, "user_dashboard.html", context=context)

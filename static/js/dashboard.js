@@ -17,3 +17,7 @@ function submitForm() {
   $('#id_email').prop("disabled", false)
   console.log("worked") 
 }
+
+$("#alert-message").delay(4000).slideUp(400, function() {
+  $(this).alert('close');
+});
