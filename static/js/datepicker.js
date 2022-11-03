@@ -132,12 +132,8 @@ jQuery('#datepicker').datetimepicker({
       time = `${selectedDate.getHours()}:${selectedDate.getMinutes()}`
       if(!(allowTimesFinal.includes(time.toString()))) {
         clearSelectedDate()
-        console.log(time)
-        console.log(allowTimesFinal)
       } else {
         setSelectedDate(selectedDate)
-        console.log(time)
-        console.log(allowTimesFinal)
       }
     }
   },

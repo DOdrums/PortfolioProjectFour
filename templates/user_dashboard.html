@@ -4,6 +4,25 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
+<!-- Modal -->
+<div class="modal fade" id="cancelModal" tabindex="-1" aria-labelledby="cancelModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="cancelModalLabel">Cancel appointment</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to cancel your appointment?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                    id="cancel-appointment">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="container mt-md-5 my-2">
     <div class="row mx-auto w-100 justify-content-center">
         <div class="text-center mb-3">
@@ -50,21 +69,40 @@
                         aria-labelledby="flush-heading-{{ forloop.counter }}"
                         data-bs-parent="#accordionFlushAppointment">
                         <div class="pt-3 pb-1 px-3">
-                            <h6>Treatment:</h6>
-                            <p>{{ appointment.treatment_name }}</p>
-                            <h6>Date:</h6>
-                            <p>{{ appointment.date_time }}</p>
-                            <h6>Duration:</h6>
-                            <p>{{ appointment.duration }} min</p>
-                            <div class="row justify-content-center">
-                                <a href="#"
-                                    class="nav-link fs-5 btn btn-secondary btn-card col-5 m-2 p-1 text-white">Change
-                                    Date
-                                </a>
-                                <a href="#"
-                                    class="nav-link fs-5 btn btn-secondary btn-card col-5 m-2 p-1 text-white">Cancel
-                                </a>
-                            </div>
+                            <form method="POST" id="{{ appointment.id }}">
+                                {% csrf_token %}
+                                <h6>Treatment:</h6>
+                                <p>{{ appointment.treatment_name }}</p>
+                                <h6>Date:</h6>
+                                <p>{{ appointment.date_time }}</p>
+                                <h6>Duration:</h6>
+                                <p>{{ appointment.duration }} min</p>
+                                {% if appointment.not_cancellable %}
+                                <div class="row justify-content-center">
+                                    <a href="#"
+                                        class="nav-link fs-5 btn btn-secondary btn-card col-5 m-2 p-1 text-white disabled">Change
+                                        Date
+                                    </a>
+                                    <button type="button"
+                                        class="nav-link fs-5 btn btn-secondary btn-card col-5 m-2 p-1 text-white disabled">Cancel
+                                    </button>
+                                </div>
+                                {% else %}
+                                <div class="row justify-content-center">
+                                    <a href="#"
+                                        class="nav-link fs-5 btn btn-secondary btn-card col-5 m-2 p-1 text-white">Change
+                                        Date
+                                    </a>
+                                    <button type="button"
+                                        class="fs-5 btn btn-secondary btn-card col-5 m-2 p-1 text-white cancelButton"
+                                        data-bs-toggle="modal" data-bs-target="#cancelModal"
+                                        value="{{ appointment.id }}">Cancel
+                                    </button>
+                                </div>
+                                {% endif %}
+                                <input name="appointment_id" value="{{ appointment.id }}"
+                                    style="display: none;"></input>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -72,7 +110,6 @@
             </div>
         </div>
     </div>
-</div>
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script src="{% static 'js/dashboard.js' %}"></script>
-{% endblock %}
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="{% static 'js/dashboard.js' %}"></script>
+    {% endblock %}

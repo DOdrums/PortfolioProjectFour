@@ -24,6 +24,12 @@ class Dashboard(View):
         appointmentQueryset2 = Appointment.objects.filter(date_time__gt=yesterday).filter(email=request.user.email).order_by("date_time").values()
         appointmentQueryset = list(appointmentQueryset1 | appointmentQueryset2)
         for dict in appointmentQueryset:
+            date = dict["date_time"]
+            check_date = datetime.now() + timedelta(days=2)
+ 
+            if date <= check_date:
+                dict["not_cancellable"] = True
+                print("don't cancel me")
             dict["date_time_short"] = dict["date_time"].strftime("%A %d %B, %H:%M")
             dict["date_time"] = dict["date_time"].strftime("%A %d %B %Y, %H:%M")
             dict["duration"] = int(Treatment.objects.get(id=dict['treatment_name_id']).duration)
@@ -43,6 +49,16 @@ class Dashboard(View):
             dict["date_time"] = dict["date_time"].strftime("%A %d %B %Y, %H:%M")
             dict["duration"] = int(Treatment.objects.get(id=dict['treatment_name_id']).duration)
             dict["treatment_name"] = Treatment.objects.get(id=dict['treatment_name_id']).title
+        
+        if request.POST.get('appointment_id', default=None):
+            appointment_id = request.POST.get('appointment_id')
+            appointment = Appointment.objects.filter(id=appointment_id)
+            if request.user.email == Appointment.objects.get(id=appointment_id).email:
+                appointment.delete()
+                return HttpResponseRedirect("dashboard")
+            else:
+                return HttpResponseRedirect("dashboard")
+            
 
         if request.POST.get('first_name', default=None):
             form = EditUserForm(data=request.POST, instance=request.user)
