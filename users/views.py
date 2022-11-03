@@ -24,6 +24,7 @@ class Dashboard(View):
         appointmentQueryset2 = Appointment.objects.filter(date_time__gt=yesterday).filter(email=request.user.email).order_by("date_time").values()
         appointmentQueryset = list(appointmentQueryset1 | appointmentQueryset2)
         for dict in appointmentQueryset:
+            dict["date_time_short"] = dict["date_time"].strftime("%A %d %B, %H:%M")
             dict["date_time"] = dict["date_time"].strftime("%A %d %B %Y, %H:%M")
             dict["duration"] = int(Treatment.objects.get(id=dict['treatment_name_id']).duration)
             dict["treatment_name"] = Treatment.objects.get(id=dict['treatment_name_id']).title
@@ -38,6 +39,7 @@ class Dashboard(View):
         appointmentQueryset2 = Appointment.objects.filter(date_time__gt=yesterday).filter(email=request.user.email).order_by("date_time").values()
         appointmentQueryset = list(appointmentQueryset1 | appointmentQueryset2)
         for dict in appointmentQueryset:
+            dict["date_time_short"] = dict["date_time"].strftime("%A %d %B, %H:%M")
             dict["date_time"] = dict["date_time"].strftime("%A %d %B %Y, %H:%M")
             dict["duration"] = int(Treatment.objects.get(id=dict['treatment_name_id']).duration)
             dict["treatment_name"] = Treatment.objects.get(id=dict['treatment_name_id']).title
