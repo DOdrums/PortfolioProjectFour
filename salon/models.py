@@ -28,6 +28,10 @@ class Appointment(models.Model):
     treatment_name = models.ForeignKey(Treatment, related_name="treatment_name", on_delete=models.PROTECT, null=True)
     date_time = models.DateTimeField()
 
+    def save(self, *args, **kwargs):
+        self.date_time = self.date_time.replace(tzinfo=None)
+        super(Appointment, self).save(*args, **kwargs)
+
 class Planning(models.Model):
     validate_times = RegexValidator(r'^(?:[01]\d|2[1-3]):[0-5]\d(?::[0-5]\d)?(?:,(?:[01]\d|2[1-3]):[0-5]\d(?::[0-5]\d)?)*$', 'Please enter comma seperated times, without spaces, like so: 12:00,13:15')
     validate_dates = RegexValidator(r'^(\s{0,})(\d{2}\.\d{2}\.\d{4})(,\d{2}\.\d{2}\.\d{4}){1,}(\s){0,}$', 'Please enter comma seperated dates (dd.mm.yyyy), without spaces, like so: 01.11.2028,02.11.2028')

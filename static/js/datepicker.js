@@ -84,7 +84,16 @@ function getBlockedTimesList(selectedDate) {
       }
       // if time + duration is > than starttime, remove all times before
       // check treatmentEndTime UNTIL endtime, than go to next appointment
-
+    } else {
+      for (time of allowedTimesList) {
+        // loop over all the times to see which times should be bookable
+        let treatmentEndTime = new Date(time.getTime() + selectedTreatmentDuration*60000)
+        if (treatmentEndTime > workDayEndTime) {
+          // first we block off any times that cause the selected treatment to run later than
+          // the end of the workday
+          allowedTimesList = allowedTimesList.filter(e => e !== time);
+        }
+      }
     }
   });
   let blockedTimesList = allowedTimesList
