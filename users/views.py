@@ -3,8 +3,10 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views import View
 from users.forms import EditUserForm
-from salon.models import Appointment, Treatment
+from users.forms import EditAppointmentForm
+from salon.models import Appointment, Treatment, Planning
 from users.models import User
+import json
 
 # Create your views here.
 class Dashboard(View):
@@ -35,7 +37,7 @@ class Dashboard(View):
             dict["duration"] = int(Treatment.objects.get(id=dict['treatment_name_id']).duration)
             dict["treatment_name"] = Treatment.objects.get(id=dict['treatment_name_id']).title
         context = {"user_form": user_form, "appointments": appointmentQueryset}
-        return render(request, "user_dashboard.html", context=context)
+        return render(request, "user-dashboard.html", context=context)
     
     def post(self, request):
 
@@ -75,10 +77,35 @@ class Dashboard(View):
                 user_form = EditUserForm(initial=user_dict)
 
                 context = {"user_form": user_form, "appointments": appointmentQueryset, "saved": True}
-                return render(request, "user_dashboard.html", context=context)
+                return render(request, "user-dashboard.html", context=context)
             else:
                 user_dict = {'email': request.user.email, 'first_name': request.user.first_name, 'last_name': request.user.last_name, 'phone_number': request.user.phone_number}
                 user_form = EditUserForm(initial=user_dict)
 
                 context = {"user_form": user_form, "appointments": appointmentQueryset, "not_saved": True}
-                return render(request, "user_dashboard.html", context=context)
+                return render(request, "user-dashboard.html", context=context)
+
+class EditAppointment(View):
+
+    def get(self, request, slug):
+        if request.user.email == Appointment.objects.get(id=slug).email: 
+            treatment_id = Appointment.objects.get(id=slug).treatment_name
+            user_dict = {}
+            treatments = Treatment.objects.filter(title=treatment_id).order_by("title").values()
+            treatments_tuple = [(str(i["id"]) + "," + str(i["duration"]), i["title"] + " - " + str(i["duration"]) + " min - €" + str(i["price"])) for i in treatments]
+            user_dict = {'email': request.user.email, 'first_name': request.user.first_name, 'last_name': request.user.last_name, 'phone_number': request.user.phone_number} 
+
+            yesterday = datetime.today() - timedelta(days=1)
+            appointmentQueryset = list(Appointment.objects.filter(date_time__gt=yesterday).order_by("date_time").values())
+            planningQueryset = list(Planning.objects.filter(active=True).order_by("title").values())
+
+            for dict in appointmentQueryset:
+                dict["date_time"] = dict["date_time"].isoformat()
+                dict["duration"] = int(Treatment.objects.get(id=dict['treatment_name_id']).duration)
+
+            form = EditAppointmentForm(initial=user_dict)
+            form.fields["treatment_name"].choices = treatments_tuple
+            context = {"planning": json.dumps(planningQueryset), "appointments": json.dumps(appointmentQueryset), "appointment_form": form}
+            return render(request, "book.html", context=context)
+        else:
+            return render(request, "book-error.html") 
