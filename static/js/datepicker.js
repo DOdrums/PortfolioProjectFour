@@ -12,9 +12,14 @@ var disabledWeekDaysList = disabledWeekDays.map(function (x) {
 })
 
 document.getElementById('id_date_time').disabled = true;
-document.getElementById('booking_form').addEventListener("submit", submitForm) 
+document.getElementById('booking_form').addEventListener("submit", submitForm)
+
 function submitForm() {
   document.getElementById('id_date_time').disabled = false;
+  document.getElementById('id_email').disabled = false;
+  document.getElementById('id_first_name').disabled = false;
+  document.getElementById('id_last_name').disabled = false;
+  document.getElementById('id_phone_number').disabled = false;
 }
 
 var selectedDate = new Date()
@@ -29,12 +34,25 @@ getBlockedTimesList(selectedDate)
 // this is done per day, so the list changes when a new date is selected.
 
 document.getElementById('id_treatment_name').addEventListener('change', setTreatment, true);
+
+if($('#id_treatment_name').val()) {
+  treatmentValue = $('#id_treatment_name').val()
+  setTreatmentEdit(treatmentValue)
+}
+
 // get value from selected treatment option and store duration value in selectedTreatmentDuration
 function setTreatment(e) {
   document.getElementById('datepicker-cover-left').style.display = "none";
   document.getElementById('datepicker-cover-right').style.display = "none";
   selectedTreatmentDuration = parseInt(e.target.value.split(",")[1])
   getBlockedTimesList(selectedDate)
+}
+
+function setTreatmentEdit(value) {
+  document.getElementById('datepicker-cover-left').style.display = "none";
+  document.getElementById('datepicker-cover-right').style.display = "none";
+  selectedTreatmentDuration = parseInt(value.split(",")[1]) 
+  getBlockedTimesList(selectedDate) 
 }
 
 function getAllowdTimesListWithDate(date) {

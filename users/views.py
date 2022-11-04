@@ -90,10 +90,13 @@ class EditAppointment(View):
     def get(self, request, slug):
         if request.user.email == Appointment.objects.get(id=slug).email: 
             treatment_id = Appointment.objects.get(id=slug).treatment_name
+            appointment_date = Appointment.objects.get(id=slug).date_time
+            appointment_date = appointment_date.strftime("%d-%m-%Y %H:%M")
+            print(appointment_date)
             user_dict = {}
             treatments = Treatment.objects.filter(title=treatment_id).order_by("title").values()
             treatments_tuple = [(str(i["id"]) + "," + str(i["duration"]), i["title"] + " - " + str(i["duration"]) + " min - €" + str(i["price"])) for i in treatments]
-            user_dict = {'email': request.user.email, 'first_name': request.user.first_name, 'last_name': request.user.last_name, 'phone_number': request.user.phone_number} 
+            user_dict = {'email': request.user.email, 'first_name': request.user.first_name, 'last_name': request.user.last_name, 'phone_number': request.user.phone_number, 'date_time': appointment_date} 
 
             yesterday = datetime.today() - timedelta(days=1)
             appointmentQueryset = list(Appointment.objects.filter(date_time__gt=yesterday).order_by("date_time").values())
@@ -104,8 +107,18 @@ class EditAppointment(View):
                 dict["duration"] = int(Treatment.objects.get(id=dict['treatment_name_id']).duration)
 
             form = EditAppointmentForm(initial=user_dict)
-            form.fields["treatment_name"].choices = treatments_tuple
+            # form.fields["treatment_name"].choices = treatments_tuple
             context = {"planning": json.dumps(planningQueryset), "appointments": json.dumps(appointmentQueryset), "appointment_form": form}
-            return render(request, "book.html", context=context)
+            return render(request, "edit-appointment.html", context=context)
         else:
-            return render(request, "book-error.html") 
+            return render(request, "book-error.html")
+        
+    def post(self, request, slug):
+        form = EditAppointmentForm(request.POST, instance=Appointment.objects.get(id=slug))
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect("dashboard", kwargs=({}))
+        else:
+            print(form.errors)
+            form = EditAppointmentForm()
+            return HttpResponseRedirect("book-error")

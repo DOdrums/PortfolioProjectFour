@@ -1,3 +1,4 @@
+from datetime import datetime
 from allauth.account.forms import SignupForm, LoginForm
 from django import forms
 from salon.models import Appointment, Treatment
@@ -52,7 +53,10 @@ class EditUserForm(forms.ModelForm):
 class EditAppointmentForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(EditAppointmentForm, self).__init__(*args, **kwargs)
-        self.fields['treatment_name'] = forms.ChoiceField()
+        treatments = Treatment.objects.filter(active=True).order_by("title").values()
+        treatments_tuples = [("", "---------------")]
+        treatments_tuples = treatments_tuples + [(str(i["id"]) + "," + str(i["duration"]), i["title"] + " - " + str(i["duration"]) + " min - €" + str(i["price"])) for i in treatments]
+        self.fields['treatment_name'] = forms.ChoiceField(choices=treatments_tuples)
         self.fields['date_time'] = forms.CharField()
         self.fields['date_time'].label = "Date"
         self.fields['date_time'].required = True 
@@ -73,6 +77,7 @@ class EditAppointmentForm(forms.ModelForm):
 
     def clean(self):
         cleaned_data = super().clean()
+        print(cleaned_data)
         treatment_value = cleaned_data["treatment_name"].split(",")
         treatment_id = int(treatment_value[0])
         treatment_name = Treatment.objects.get(id=treatment_id)

@@ -20,7 +20,7 @@
                 {% csrf_token %}
                 {{ appointment_form | crispy }}
                 <div class="my-4">
-                    <button type="submit" class="btn btn-secondary btn-card btn-lg">Book</button>
+                    <button type="submit" class="btn btn-secondary btn-card btn-lg">Change date</button>
                 </div>
             </form>
         </div>
@@ -44,4 +44,5 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="{% static 'js/jquery.datetimepicker.full.min.js' %}"></script>
 <script src="{% static 'js/datepicker.js' %}"></script>
+<script src="{% static 'js/editAppointment.js' %}"></script>
 {%endblock%}
