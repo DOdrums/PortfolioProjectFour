@@ -1,1 +1,0 @@
-Dummy files for whitenoise to find the staticfiles dir

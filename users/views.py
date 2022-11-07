@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.urls import reverse
 from django.views import View
 from users.forms import EditUserForm
 from users.forms import EditAppointmentForm
@@ -107,7 +108,7 @@ class EditAppointment(View):
                 dict["duration"] = int(Treatment.objects.get(id=dict['treatment_name_id']).duration)
 
             form = EditAppointmentForm(initial=user_dict)
-            # form.fields["treatment_name"].choices = treatments_tuple
+            form.fields["treatment_name"].choices = treatments_tuple
             context = {"planning": json.dumps(planningQueryset), "appointments": json.dumps(appointmentQueryset), "appointment_form": form}
             return render(request, "edit-appointment.html", context=context)
         else:
@@ -117,7 +118,7 @@ class EditAppointment(View):
         form = EditAppointmentForm(request.POST, instance=Appointment.objects.get(id=slug))
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect("dashboard", kwargs=({}))
+            return HttpResponseRedirect(reverse("dashboard"))
         else:
             print(form.errors)
             form = EditAppointmentForm()
