@@ -1,1 +1,0 @@
-This is a dummy file so Whitenoise can find the staticfiles directory
