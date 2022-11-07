@@ -56,7 +56,6 @@ INSTALLED_APPS = [
     'fontawesomefree',
     'django.contrib.staticfiles',
     'cloudinary',
-    'django_rename_app',
     'crispy_forms',
     'users',
     'salon',

@@ -24,9 +24,10 @@
     <div class="container" id="book-button">
         <div class="row">
             <div class="col-lg-3 col-9">
-                <button class=" btn btn-secondary btn-lg btn-card d-flex mx-auto justify-content-center"
-                    style="font-size: 30px;">Book
-                    Now!</button>
+                <a href="{% url 'book' %}"
+                    class="btn btn-secondary btn-lg btn-card d-flex mx-auto justify-content-center"
+                    style="font-size: 30px; max-width: 204px">Book
+                    Now!</a>
             </div>
         </div>
     </div>
@@ -75,7 +76,7 @@
             <div class="card-body">
                 <h4 class="card-title mb-3 mt-1">{{ treatment.appointment_type }}</h4>
                 <p class="card-text">{{ treatment.short_description }}</p>
-                <a href="#" class="btn btn-secondary btn-lg col-12 btn-card">Book Now</a>
+                <a href="{% url 'book' %}" class="btn btn-secondary btn-lg col-12 btn-card">Book Now</a>
             </div>
         </div>
         {% endfor %}
