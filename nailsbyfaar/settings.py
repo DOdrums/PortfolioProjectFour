@@ -35,7 +35,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = development
 
 if development:
-    ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+    ALLOWED_HOSTS = ["localhost", "127.0.0.1", "nailsbyfaar.herokuapp.com"]
 else:
     ALLOWED_HOSTS = ["nailsbyfaar.herokuapp.com"]
 
