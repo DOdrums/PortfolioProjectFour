@@ -215,13 +215,22 @@ ul li {
         background-size: cover;
     }
 
+    #slogan-container {
+        max-width: 100%;
+    }
+
     #slogan {
-        display: none;
+        margin-top: -435px !important;
+        margin-left: 45px;
     }
 
     #book-button-container {
-        margin-top: -398px;
-        margin-left: -31px;
+        margin-top: 48px;
+        left: -103px;
+    }
+
+    #book-button {
+        max-width: 194px;
     }
 }
 
@@ -234,10 +243,23 @@ ul li {
     #datepicker-right {
         display: none;
     }
+
+    #book-button-container {
+        margin-top: -398px;
+        left: -66px;
+    }
+
+    #book-button {
+        font-size: 27px;
+    }
+
+    #slogan {
+        display: none;
+    }
 }
 
 /* Devices 413px and down */
-@media (max-width: 413px) {
+@media (max-width: 575px) {
 
     #book-button-container {
         left: 35px;
