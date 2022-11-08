@@ -12,6 +12,8 @@ class CustomSignUpForm(SignupForm):
         self.fields['first_name'] = forms.CharField(required=False)
         self.fields['last_name'] = forms.CharField(required=False)
         self.fields['phone_number'] = forms.CharField(required=False)
+        self.fields['first_name'].required = True 
+        self.fields['last_name'].required = True 
 
         for fieldname, field in self.fields.items():
             field.widget.attrs.update({

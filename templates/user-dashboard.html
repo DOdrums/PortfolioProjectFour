@@ -55,6 +55,10 @@
         </div>
         <div class="col-md-5 m-4 py-3 px-md-4 user-data-box">
             <h4>Your appointments</h4>
+            {% if not appointments %}
+            <p>You don't have any appointments yet! Click <a href="{% url 'book' %}">here</a> to book one now!</p>
+            {% else %}
+            {% endif %}
             <div class="mt-4 accordion accordion-flush" id="accordionFlushAppointment">
                 {% for appointment in appointments %}
                 <div class="accordion-item">
