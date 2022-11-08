@@ -69,6 +69,33 @@ ul li {
     font-weight: 400;
 }
 
+/* divider */
+/* code taken from Simeon Vincent: https://codepen.io/dotproto/pen/mdOXve */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.gradient {
+    height: 14px;
+    position: relative;
+    width: 100%;
+    background: radial-gradient(ellipse farthest-side at top center, rgb(74 39 39 / 8%), transparent);
+}
+
+.gradient:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0px;
+    right: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(left, transparent, rgba(0, 0, 0, .02), rgba(0, 0, 0, .02), transparent);
+}
+
 /* homepage */
 
 #slogan {
