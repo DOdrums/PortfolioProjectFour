@@ -194,11 +194,7 @@ ul li {
     .fa-li {
         margin: 0 auto;
         left: 0;
-        width: inherit;
-    }
-
-    .text-nowrap {
-        white-space: normal !important;
+        width: 100% !important;
     }
 
     /* make hero image fit mobile */
@@ -237,6 +233,16 @@ ul li {
 
 /* Devices 413px and down */
 @media (max-width: 413px) {
+
+    #book-button {
+        left: 7px;
+        width: 344px;
+    }
+
+    .text-nowrap {
+        white-space: normal !important;
+    }
+
     .datepicker-center {
         width: 100%;
     }
@@ -244,4 +250,5 @@ ul li {
     .datepicker-cover {
         width: 100%;
     }
+
 }
