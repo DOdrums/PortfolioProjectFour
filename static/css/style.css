@@ -140,12 +140,16 @@ ul li {
     border-radius: 20%;
 }
 
+/* booking page */
+
 .custom-form-field {
     margin-top: 5px;
     margin-bottom: 10px;
 }
 
-/* booking page */
+.asteriskField {
+    display: none;
+}
 
 .datepicker-cover {
     display: block;

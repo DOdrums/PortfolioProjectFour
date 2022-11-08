@@ -9,12 +9,13 @@ class AppointmentForm(forms.ModelForm):
         treatments_tuples = [("", "---------------")]
         treatments_tuples = treatments_tuples + [(str(i["id"]) + "," + str(i["duration"]), i["title"] + " - " + str(i["duration"]) + " min - €" + str(i["price"])) for i in treatments]
         self.fields['treatment_name'] = forms.ChoiceField(choices=treatments_tuples)
-        self.fields['date_time'] = forms.CharField()
-        self.fields['date_time'].label = "Date"
         self.fields['date_time'].required = True 
         self.fields['email'].required = True 
         self.fields['first_name'].required = True 
         self.fields['last_name'].required = True 
+        self.fields['treatment_name'].label = "Treatment" 
+        self.fields['date_time'] = forms.CharField()
+        self.fields['date_time'].label = "Date"
         for fieldname, field in self.fields.items():
             field.widget.attrs.update({
             'class': 'custom-form-field'
@@ -24,8 +25,8 @@ class AppointmentForm(forms.ModelForm):
         model = Appointment
         fields = ('treatment_name', 'date_time', 'email', 'first_name', 'last_name', 'phone_number')
         labels = {
-            'treatment_name': ('Treatment')
-        }
+            'phone_number': ('Phone number (optional)')
+        }        
 
     def clean(self):
         cleaned_data = super().clean()
