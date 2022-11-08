@@ -78,11 +78,16 @@ ul li {
 
 }
 
-#book-button {
+#book-button-container {
     position: absolute;
     margin-top: 108px;
     left: 115px;
     width: 873px;
+}
+
+#book-button {
+    font-size: 30px;
+    max-width: 204px;
 }
 
 .fa-ul {
@@ -214,7 +219,7 @@ ul li {
         display: none;
     }
 
-    #book-button {
+    #book-button-container {
         margin-top: -398px;
         margin-left: -31px;
     }
@@ -234,13 +239,22 @@ ul li {
 /* Devices 413px and down */
 @media (max-width: 413px) {
 
+    #book-button-container {
+        left: 35px;
+        width: 233px;
+    }
+
     #book-button {
-        left: 7px;
-        width: 344px;
+        font-size: 21px;
     }
 
     .text-nowrap {
         white-space: normal !important;
+    }
+
+    .footer-social-icon {
+        display: inline;
+        margin-left: 25px !important;
     }
 
     .datepicker-center {
