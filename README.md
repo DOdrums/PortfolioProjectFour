@@ -144,6 +144,7 @@ As a data model the app uses a Product class. An instance of this class is creat
 * [Stackeroverflow(answer from 'fceruti')](https://stackoverflow.com/a/9957402/16545052) - to update a user instances information in the POST method of the Dashboard view.
 * [Stackeroverflow(answer from 'Alex Fuentes')](https://stackoverflow.com/a/25319333/16545052) - to make the alert message that appears when editing user data slide up after 4 seconds. 
 * [Codepen](https://codepen.io/dotproto/pen/mdOXve) - for the css code of a divider used on homepage.
+* [Stackeroverflow(answer from 'Griffosx')](https://stackoverflow.com/a/13624393/16545052) - to check if loop index if even or uneven in treatments page. 
 
 
 

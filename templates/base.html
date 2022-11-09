@@ -24,66 +24,69 @@
 
 <body class="d-flex flex-column min-vh-100">
     <header>
-        <nav class="navbar navbar-expand-md navbar-color">
-            <div class="container-fluid">
-                <a href="#" class="navbar-brand"><img
-                        src="https://res.cloudinary.com/dirkornee/image/upload/v1666360592/logo-no-background_thicker_s1qwll.png"
-                        alt="logo-nailsbyfaar" style="height: 130px; margin: -24px;"></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a href="{% url 'home' %}" class="nav-link fs-5">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link fs-5">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{% url 'treatments' %}" class="nav-link fs-5">Treatments</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link fs-5">Gallery</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{% url 'book' %}" class="nav-link fs-5">Book</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link fs-5">Contact</a>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        {% if request.user.is_authenticated %}
-                        <li class="nav-item dropdown me-4">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                <i class="far fa-user-circle fa-lg me-1"></i>{{ user.first_name }}
-                                {{user.last_name}}
-                            </a>
-                            <ul class="dropdown-menu navbar-dropdown-color">
-                                <li>
-                                    <a href="{% url 'dashboard' %}" class="dropdown-item">Dashboard</a>
-                                </li>
-                                <li class="dropdown-divider"></li>
-                                <li>
-                                    <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
-                                </li>
-                            </ul>
-                        </li>
-                        {% else %}
-                        <li class="na-item">
-                            <a href="{% url 'account_login' %}" class="nav-link fs-5 btn btn-outline-primary btn-login"
-                                id="btn-login">Login</a>
-                        </li>
-                        {% endif %}
-                    </ul>
+        {% if not is_home %}
+        <nav class="navbar navbar-expand-md navbar-color navbar-background">
+            {% else %}
+            <nav class="navbar navbar-expand-md navbar-color">
+                {% endif %}
+                <div class="container-fluid">
+                    <a href="#" class="navbar-brand"><img
+                            src="https://res.cloudinary.com/dirkornee/image/upload/v1666360592/logo-no-background_thicker_s1qwll.png"
+                            alt="logo-nailsbyfaar" style="height: 130px; margin: -24px;"></a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a href="{% url 'home' %}" class="nav-link fs-5">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link fs-5">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'treatments' %}" class="nav-link fs-5">Treatments</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link fs-5">Gallery</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'book' %}" class="nav-link fs-5">Book</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link fs-5">Contact</a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                            {% if request.user.is_authenticated %}
+                            <li class="nav-item dropdown me-4">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    <i class="far fa-user-circle fa-lg me-1"></i>{{ user.first_name }}
+                                    {{user.last_name}}
+                                </a>
+                                <ul class="dropdown-menu navbar-dropdown-color">
+                                    <li>
+                                        <a href="{% url 'dashboard' %}" class="dropdown-item">Dashboard</a>
+                                    </li>
+                                    <li class="dropdown-divider"></li>
+                                    <li>
+                                        <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            {% else %}
+                            <li class="na-item">
+                                <a href="{% url 'account_login' %}"
+                                    class="nav-link fs-5 btn btn-outline-primary btn-login" id="btn-login">Login</a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </nav>
-
+            </nav>
     </header>
     <main>
         {% block content %}

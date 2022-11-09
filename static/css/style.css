@@ -13,9 +13,11 @@ p {
 
 h1 {
     font-size: 3.4rem;
+    color: #a17772;
 }
 
 h2 {
+    font-size: 2.8rem;
     color: #672a2e;
 }
 
@@ -52,6 +54,10 @@ ul li {
 .navbar-color {
     --bs-navbar-color: #672a2ee6;
     --bs-navbar-hover-color: #a17772;
+}
+
+.navbar-background {
+    background-color: #ededed;
 }
 
 .navbar-dropdown-color {
@@ -183,12 +189,15 @@ ul li {
 
 /* treatments page */
 
+/* featurette code inspired by Flask walktrough project form Code Institute */
+
 .featurette {
     padding-top: 120px;
     overflow: hidden;
 }
 
 .featurette-image {
+    border-radius: 2rem;
     margin-top: -120px;
     height: 512px;
     max-width: 100%;
@@ -222,6 +231,18 @@ ul li {
     margin: 80px 0;
     border: 0;
     border-top: 2px solid #4e4d4dbd;
+}
+
+.btn-right {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.btn-left {
+    position: absolute;
+    bottom: 0;
+    left: 0;
 }
 
 /* booking page */

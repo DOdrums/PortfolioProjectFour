@@ -3,6 +3,24 @@
 {% load static %}
 
 {% block content %}
+<div class="container mt-md-5 my-2 text-center">
+    <div class="row">
+        <div class="col-md-10 mx-auto mt-3 offset-md-2 text-center">
+            <h1 class="mt-3">Treatments</h1>
+            <p class="mx-auto mt-4" style="width: 80%;">NailsByFaar Lorem ipsum, dolor sit amet consectetur adipisicing
+                elit. Veniam voluptatibus
+                soluta in
+                suscipit cumque maxime iure fugiat architecto iusto quam iste quibusdam consequuntur ipsam cupiditate
+                assumenda, eos neque numquam. Beatae. Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Recusandae eaque veniam numquam omnis tempora voluptas quis quae ea cum eligendi magni sunt, officia
+                cumque odio consequuntur esse. Repudiandae, hic in. Lorem ipsum dolor sit, amet consectetur adipisicing
+                elit. Ipsa aliquid, deleniti voluptatum in recusandae sit quidem. Labore asperiores, excepturi sint
+                impedit ut eveniet ex repudiandae ab. Ex nostrum quia ut.</p>
+        </div>
+    </div>
+</div>
+<!-- divider -->
+<div class="gradient my-5"></div>
 
 <div class="container p-lg-5">
     {% for treatment in treatments %}
@@ -10,24 +28,34 @@
 
         {% ifequal forloop.counter|divisibleby:"2" True %}
 
-        <div class="featurette">
+        <div class="featurette position-relative">
             <img src="{{ treatment.image.url }}" alt="image of {{ treatment.title }} treatment"
                 class="featurette-image pull-left">
 
             <h2 class="featurette-heading">{{ treatment.title }}</h2>
             <p>{{ treatment.description }}</p>
-        </div>
 
+
+            <a href="{% url 'book' %}"
+                class="btn-right btn btn-secondary btn-lg btn-card d-flex mx-auto justify-content-center"
+                id="book-button">Book
+                Now!</a>
+        </div>
         {% else %}
 
-        <div class="featurette">
+        <div class="featurette position-relative">
             <img src="{{ treatment.image.url }}" alt="image of {{ treatment.title }} treatment"
                 class="featurette-image pull-right">
 
             <h2 class="featurette-heading">{{ treatment.title }}</h2>
             <p>{{ treatment.description }}</p>
-        </div>
 
+
+            <a href="{% url 'book' %}"
+                class="btn-left btn btn-secondary btn-lg btn-card d-flex mx-auto justify-content-center"
+                id="book-button">Book
+                Now!</a>
+        </div>
         {% endifequal %}
 
     </div>
