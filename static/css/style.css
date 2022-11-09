@@ -397,6 +397,19 @@ ul li {
         margin: 16px 0;
     }
 
+    /* treatment page */
+    .btn-right {
+        position: unset;
+        bottom: unset;
+        right: unset;
+    }
+
+    .btn-left {
+        position: unset;
+        bottom: unset;
+        left: unset;
+    }
+
     /* book page */
     #book-button-container {
         margin-top: -398px;
