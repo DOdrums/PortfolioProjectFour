@@ -98,6 +98,19 @@ ul li {
 
 /* homepage */
 
+.hero-outer {
+    height: 608px;
+    width: 100%;
+}
+
+.hero-image {
+    background: url(https://res.cloudinary.com/dirkornee/image/upload/v1666012817/hero-image_fzvujo.jpg) 26%;
+    height: 613px;
+    margin-top: -99px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 #slogan {
     margin-top: -459px !important;
     margin-left: 107px;
@@ -122,28 +135,21 @@ ul li {
     margin-left: 2rem;
 }
 
+.card:hover {
+    box-shadow: rgba(103 42 46 / 12%) 0px 0px 8px 0px, rgb(103 42 46 / 24%) 0px 8px 8px 0px;
+}
+
 .card-img-top {
     /* align images in homepage treatment cards */
-    margin-top: 9px;
-    border-radius: 4px;
+    border-radius: 1rem;
+    margin: 0 auto;
+    margin-top: 19px;
+    width: 94%;
 }
 
 .full-width {
     /* class to extend max-width in bootstrap containers */
     max-width: 1400px;
-}
-
-.hero-outer {
-    height: 608px;
-    width: 100%;
-}
-
-.hero-image {
-    background: url(https://res.cloudinary.com/dirkornee/image/upload/v1666012817/hero-image_fzvujo.jpg) 26%;
-    height: 613px;
-    margin-top: -99px;
-    background-repeat: no-repeat;
-    background-size: cover;
 }
 
 .btn-card {
@@ -155,6 +161,10 @@ ul li {
     --bs-btn-active-border-color: #672A2E;
 }
 
+.btn-card:hover {
+    box-shadow: rgba(103 42 46 / 12%) 0px 0px 8px 0px, rgb(103 42 46 / 24%) 0px 8px 8px 0px;
+}
+
 .btn-login {
     color: #4e4d4dbd;
     --bs-btn-color: #BC8180;
@@ -164,7 +174,11 @@ ul li {
     --bs-btn-hover-border-color: #BC8180;
     --bs-btn-active-bg: #BC8180;
     --bs-btn-active-border-color: #BC8180;
-    border-radius: 20%;
+    border-radius: 1rem;
+}
+
+.salon-image {
+    border-radius: 6rem;
 }
 
 /* treatments page */

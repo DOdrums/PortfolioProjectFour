@@ -49,11 +49,14 @@
         <div class="row p-sm-0 p-4">
             {% for treatment in treatments %}
             <div class="card col-sm-12 col-md m-xl-5 m-lg-2 m-md-2 mb-3">
+                <a class="stretched-link" href="{% url 'treatments' %}"></a>
                 <img src="{{ treatment.image.url }}" alt="image of nail treatment" class="card-img-top">
                 <div class="card-body">
                     <h4 class="card-title mb-3 mt-1">{{ treatment.appointment_type }}</h4>
                     <p class="card-text">{{ treatment.short_description }}</p>
-                    <a href="{% url 'book' %}" class="btn btn-secondary btn-lg col-12 btn-card">Book Now</a>
+                    <a href="{% url 'book' %}" class="btn position-relative z- btn-secondary btn-lg col-12 btn-card"
+                        style="z-index: 3;">Book
+                        Now</a>
                 </div>
             </div>
             {% endfor %}
@@ -77,7 +80,7 @@
                     optio?</p>
             </div>
             <div class="col-12 col-md-6 mt-3 mt-md-0 p-lg-5">
-                <img class="img-fluid"
+                <img class="img-fluid salon-image"
                     src="https://res.cloudinary.com/dirkornee/image/upload/v1664376102/salon_ryti69.jpg"
                     alt="image of salon NailsbyFaar">
             </div>
