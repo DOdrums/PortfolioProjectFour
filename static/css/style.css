@@ -167,6 +167,49 @@ ul li {
     border-radius: 20%;
 }
 
+/* treatments page */
+
+.featurette {
+    padding-top: 120px;
+    overflow: hidden;
+}
+
+.featurette-image {
+    margin-top: -120px;
+    height: 512px;
+    max-width: 100%;
+    vertical-align: middle;
+    border: 0;
+}
+
+.pull-right {
+    float: right;
+}
+
+.featurette-image.pull-right {
+    margin-left: 40px
+}
+
+.pull-left {
+    float: left;
+}
+
+.featurette-image.pull-left {
+    margin-right: 40px;
+}
+
+.featurette-heading {
+    font-size: 50px;
+    line-height: 1;
+    letter-spacing: -1px;
+}
+
+.featurette-divider {
+    margin: 80px 0;
+    border: 0;
+    border-top: 2px solid #4e4d4dbd;
+}
+
 /* booking page */
 
 .custom-form-field {
@@ -222,6 +265,8 @@ ul li {
 /* Devices 992px and down */
 @media (max-width: 992px) {
 
+    /* homepage  */
+
     /* make footer items centered */
     .fa-ul {
         margin-left: 0;
@@ -255,6 +300,18 @@ ul li {
         margin-left: 45px;
     }
 
+    /* treatments page */
+
+    .featurette {
+        padding-top: 98px;
+    }
+
+    .featurette-image {
+        height: 298px;
+        margin-top: -60px;
+    }
+
+    /* book page */
     #book-button-container {
         margin-top: 48px;
         left: -103px;
@@ -275,6 +332,37 @@ ul li {
         display: none;
     }
 
+    #slogan {
+        display: none;
+    }
+
+    /* treatments page */
+    .pull-left {
+        float: none;
+    }
+
+    .featurette-image.pull-left {
+        margin-left: 0;
+    }
+
+    .pull-right {
+        float: none;
+    }
+
+    .featurette-image.pull-right {
+        margin-left: 0;
+    }
+
+    .featurette-image {
+        margin-bottom: 25px;
+        height: auto;
+    }
+
+    .featurette-divider {
+        margin: 16px 0;
+    }
+
+    /* book page */
     #book-button-container {
         margin-top: -398px;
         left: -66px;
@@ -284,9 +372,7 @@ ul li {
         font-size: 27px;
     }
 
-    #slogan {
-        display: none;
-    }
+
 }
 
 /* Devices 413px and down */

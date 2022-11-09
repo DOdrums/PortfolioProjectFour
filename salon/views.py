@@ -56,3 +56,10 @@ class BookError(View):
 
     def get(self, request):
         return render(request, "book-error.html")
+
+class Treatments(View):
+
+    def get(self, request):
+        queryset = list(Treatment.objects.filter(display=True).order_by("title").values())
+        treatments = {"treatments": queryset}
+        return render(request, "treatments.html", context=treatments)

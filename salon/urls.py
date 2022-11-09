@@ -6,4 +6,5 @@ urlpatterns = [
     path('book', views.BookingModule.as_view(), name="book"),
     path('thankyou', views.ThankYou.as_view(), name="thankyou"),
     path('book-error', views.BookError.as_view(), name="book-error"),
+    path('treatments', views.Treatments.as_view(), name="treatments"),
 ]

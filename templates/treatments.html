@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="container p-lg-5">
+    {% for treatment in treatments %}
+    <div class="px-xl-5">
+
+        {% ifequal forloop.counter|divisibleby:"2" True %}
+
+        <div class="featurette">
+            <img src="{{ treatment.image.url }}" alt="image of {{ treatment.title }} treatment"
+                class="featurette-image pull-left">
+
+            <h2 class="featurette-heading">{{ treatment.title }}</h2>
+            <p>{{ treatment.description }}</p>
+        </div>
+
+        {% else %}
+
+        <div class="featurette">
+            <img src="{{ treatment.image.url }}" alt="image of {{ treatment.title }} treatment"
+                class="featurette-image pull-right">
+
+            <h2 class="featurette-heading">{{ treatment.title }}</h2>
+            <p>{{ treatment.description }}</p>
+        </div>
+
+        {% endifequal %}
+
+    </div>
+
+    {% if forloop.count != forloop|length %}
+
+    <hr class="featurette-divider">
+
+    {% endif %}
+
+    {% endfor %}
+</div>
+{% endblock %}
