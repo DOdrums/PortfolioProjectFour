@@ -42,3 +42,8 @@ class Planning(models.Model):
     disabled_dates = models.TextField(default="", validators=[validate_dates])
     disabled_weekdays = models.TextField(default="", validators=[validate_weekdays])
     active = models.BooleanField(default=False)
+
+class GalleryImage(models.Model):
+    name = models.CharField(max_length=150, unique=False, default="image") 
+    image = CloudinaryField('image', default='placeholder')
+    active = models.BooleanField(default=False) 

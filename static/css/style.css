@@ -251,6 +251,13 @@ ul li {
     left: 0;
 }
 
+/* gallery */
+.carousel-border {
+    border: 2px solid #a17772 !important;
+    padding: 10px;
+    box-shadow: 6px 4px 8px -2px;
+}
+
 /* booking page */
 
 .custom-form-field {

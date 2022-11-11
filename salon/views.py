@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views import View
 from .forms import AppointmentForm
-from .models import Appointment, Treatment, Planning
+from .models import Appointment, Treatment, Planning, GalleryImage
 import json
 
 
@@ -72,5 +72,6 @@ class About(View):
 class Gallery(View):
 
     def get(self, request):
-        insta = {"instagram_profile_name": "nails_by_faar"}
-        return render(request, "gallery.html", context=insta)
+        queryset = list(GalleryImage.objects.filter(active=True).order_by("name").values())
+        images = {"images": queryset}
+        return render(request, "gallery.html", context=images)
