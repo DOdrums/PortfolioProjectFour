@@ -9,5 +9,4 @@ urlpatterns = [
     path('treatments', views.Treatments.as_view(), name="treatments"),
     path('about', views.About.as_view(), name="about"),
     path('gallery', views.Gallery.as_view(), name="gallery"),
-    path('instagram/', include('instagram_profile.urls')),
 ]

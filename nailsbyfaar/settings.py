@@ -54,7 +54,6 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'cloudinary_storage',
     'django.contrib.staticfiles',
-    'instagram_profile',
     'cloudinary',
     'crispy_forms',
     'users',
@@ -76,13 +75,6 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 ACCOUNT_EMAIL_VERIFICATION = "none"
 ACCOUNT_FORMS = {'signup': 'users.forms.CustomSignUpForm', 'login': 'users.forms.CustomLoginForm'}
-
-# instagram_profile settings
-INSTAGRAM_PROFILE = {
-    'app_id': '843023820444890',
-    'secret': '989d1a92dd2c48cda0c95d806ad6da60',
-    'redirect_url': 'https://nailsbyfaar.herokuapp.com/admin/instagram_profile/profile/'
-} 
 
 # cripsy forms settings
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
