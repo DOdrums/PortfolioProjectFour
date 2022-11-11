@@ -68,3 +68,9 @@ class About(View):
 
     def get(self, request):
         return render(request, "about.html")
+
+class Gallery(View):
+
+    def get(self, request):
+        insta = {"instagram_profile_name": "nails_by_faar"}
+        return render(request, "gallery.html", context=insta)
