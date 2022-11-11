@@ -63,3 +63,8 @@ class Treatments(View):
         queryset = list(Treatment.objects.filter(display=True).order_by("title").values())
         treatments = {"treatments": queryset}
         return render(request, "treatments.html", context=treatments)
+
+class About(View):
+
+    def get(self, request):
+        return render(request, "about.html")
