@@ -1,6 +1,7 @@
 from time import strftime
 from datetime import datetime, timedelta
-from django.http import HttpResponseRedirect
+from django.core.mail import send_mail, BadHeaderError
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from django.views import View
 from .forms import AppointmentForm, ContactForm
@@ -84,4 +85,24 @@ class Contact(View):
             user_dict = {}
         form = ContactForm(initial=user_dict)
         context = {"contact_form": form}
-        return render(request, "contact.html", context=context) 
+        return render(request, "contact.html", context=context)
+
+    def post(self, request):
+        if request.method == 'POST':
+            form = ContactForm(request.POST)
+            if form.is_valid():
+                subject = "Nailsbyfaar website question"
+                body = {
+                    'first_name': form.cleaned_data['first_name'],
+                    'last_name': form.cleaned_data['last_name'],
+                    'email': form.cleaned_data['email'],
+                    'subject': form.cleaned_data['subject'],
+                    'message': form.cleaned_data['message'],
+                }
+                message = "\n".join(body.values())
+
+                try:
+                    send_mail(subject, message, 'dirkornee@hotmail.com', ['dirkrnee@icloud.com'])
+                except BadHeaderError:
+                    return HttpResponse('Invalid header found.')
+                return HttpResponseRedirect('contact')

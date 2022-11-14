@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'cloudinary_storage',
+    'django_ses',
     'django.contrib.staticfiles',
     'cloudinary',
     'crispy_forms',
@@ -64,6 +65,13 @@ SITE_ID = 1
 
 AUTH_USER_MODEL = 'users.User'
 
+# email settings
+
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django_ses.SESBackend'
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+
 # allauth setting
 ACCOUNT_ADAPTER = 'users.adapter.MyAccountAdapter'
 LOGIN_REDIRECT_URL = '/'
@@ -72,7 +80,6 @@ ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 ACCOUNT_EMAIL_VERIFICATION = "none"
 ACCOUNT_FORMS = {'signup': 'users.forms.CustomSignUpForm', 'login': 'users.forms.CustomLoginForm'}
 
