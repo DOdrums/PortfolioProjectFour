@@ -36,4 +36,17 @@ class AppointmentForm(forms.ModelForm):
         cleaned_data["treatment_name"] = treatment_name
         cleaned_data["date_time"] = datetime.strptime(cleaned_data["date_time"], '%d-%m-%Y %H:%M')
         return cleaned_data
-        
+
+class ContactForm(forms.Form):
+    first_name = forms.CharField(max_length = 50)
+    last_name = forms.CharField(max_length = 50)
+    email = forms.EmailField(max_length = 150)
+    subject = forms.CharField(max_length = 200)
+    message = forms.CharField(widget = forms.Textarea(attrs={'class': 'custom-form-field'}), max_length = 2000)
+    email.required = True
+    first_name.required = True 
+    last_name.required = True
+    first_name.widget.attrs.update({'class': 'custom-form-field'})
+    last_name.widget.attrs.update({'class': 'custom-form-field'})
+    email.widget.attrs.update({'class': 'custom-form-field'})
+    subject.widget.attrs.update({'class': 'custom-form-field'})

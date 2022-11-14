@@ -3,12 +3,10 @@ from datetime import datetime, timedelta
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views import View
-from .forms import AppointmentForm
+from .forms import AppointmentForm, ContactForm
 from .models import Appointment, Treatment, Planning, GalleryImage
 import json
 
-
-# Create your views here.
 class HomePage(View):
 
     def get(self, request):
@@ -75,3 +73,15 @@ class Gallery(View):
         queryset = list(GalleryImage.objects.filter(active=True).order_by("name").values())
         images = {"images": queryset}
         return render(request, "gallery.html", context=images)
+
+class Contact(View):
+
+    def get(self, request):
+        user_dict = {}
+        if request.user.is_authenticated:
+            user_dict = {'email': request.user.email, 'first_name': request.user.first_name, 'last_name': request.user.last_name}
+        else:
+            user_dict = {}
+        form = ContactForm(initial=user_dict)
+        context = {"contact_form": form}
+        return render(request, "contact.html", context=context) 

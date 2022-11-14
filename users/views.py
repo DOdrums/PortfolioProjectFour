@@ -9,7 +9,6 @@ from salon.models import Appointment, Treatment, Planning
 from users.models import User
 import json
 
-# Create your views here.
 class Dashboard(View):
 
     def get(self, request):

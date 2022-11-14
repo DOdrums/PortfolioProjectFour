@@ -30,7 +30,7 @@
             <nav class="navbar navbar-expand-md navbar-color">
                 {% endif %}
                 <div class="container-fluid">
-                    <a href="#" class="navbar-brand"><img
+                    <a href="{% url 'home' %}" class="navbar-brand"><img
                             src="https://res.cloudinary.com/dirkornee/image/upload/v1666360592/logo-no-background_thicker_s1qwll.png"
                             alt="logo-nailsbyfaar" style="height: 130px; margin: -24px;"></a>
                     <button class="navbar-toggler" id="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -56,7 +56,7 @@
                                 <a href="{% url 'book' %}" class="nav-link fs-5">Book</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link fs-5">Contact</a>
+                                <a href="{% url 'contact' %}" class="nav-link fs-5">Contact</a>
                             </li>
                         </ul>
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
