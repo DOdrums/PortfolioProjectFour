@@ -54,7 +54,7 @@ class BookingModule(View):
                 'email': form.cleaned_data['email'],
                 'phone': phone,
             }
-            html_body = render_to_string("email-book-inlined.html", context=merge_data)
+            html_body = render_to_string("email/email-book-inlined.html", context=merge_data)
             text_body = "\n".join(merge_data.values())
             form.save()
             try:

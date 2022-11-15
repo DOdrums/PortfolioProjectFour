@@ -146,6 +146,7 @@ As a data model the app uses a Product class. An instance of this class is creat
 * [Codepen](https://codepen.io/dotproto/pen/mdOXve) - for the css code of a divider used on homepage.
 * [Stackeroverflow(answer from 'Griffosx')](https://stackoverflow.com/a/13624393/16545052) - to check if loop index if even or uneven in treatments page. 
 * [Stackoverflow(answer from 'vee')](https://stackoverflow.com/a/70415401/16545052) - to listen to the mobile navbar events.
+* [Github(responsive-html-email-template)]https://github.com/leemunroe/responsive-html-email-template) - for a basic html template for emailing.
 
 
 
@@ -157,6 +158,8 @@ The app itself does not contain any images.
 ### Technologies used
 
 [HTML](https://html.spec.whatwg.org/) - for the structure of the website and mocking of the terminal (written by Code Institute)
+
+[HTMLemail/inline](https://htmlemail.io/inline/) - for making the email html template into inline html.
 
 [CSS](https://www.w3.org/Style/CSS/Overview.en.html) - to provide styling to the page.
 
