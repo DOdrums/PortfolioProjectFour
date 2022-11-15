@@ -1,6 +1,7 @@
 from time import strftime
 from datetime import datetime, timedelta
-from django.core.mail import send_mail, BadHeaderError
+from django.core.mail import send_mail, BadHeaderError, EmailMultiAlternatives
+from django.template.loader import render_to_string
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from django.views import View
@@ -40,7 +41,28 @@ class BookingModule(View):
     def post(self, request):
         form = AppointmentForm(request.POST)
         if form.is_valid():
+            subject = "Nailsbyfaar booking"
+            if form.cleaned_data['phone_number']:
+                phone = form.cleaned_data['phone_number']
+            else:
+                phone = "-"
+            merge_data = {
+                'treatment': form.cleaned_data['treatment_name'].title,
+                'date': form.cleaned_data['date_time'].strftime("%A %d %B %Y, %H:%M"),
+                'first_name': form.cleaned_data['first_name'],
+                'last_name': form.cleaned_data['last_name'],
+                'email': form.cleaned_data['email'],
+                'phone': phone,
+            }
+            html_body = render_to_string("email-book-inlined.html", context=merge_data)
+            text_body = "\n".join(merge_data.values())
             form.save()
+            try:
+                msg = EmailMultiAlternatives(subject=subject, body=text_body, from_email='dirkornee@hotmail.com', to=['dirkrnee@icloud.com'])
+                msg.attach_alternative(html_body, "text/html")
+                msg.send()
+            except BadHeaderError:
+                return HttpResponse('Invalid header found.')
             return HttpResponseRedirect("thankyou")
         else:
             form = AppointmentForm()
