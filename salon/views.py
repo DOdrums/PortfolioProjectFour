@@ -114,17 +114,20 @@ class Contact(View):
             form = ContactForm(request.POST)
             if form.is_valid():
                 subject = "Nailsbyfaar website question"
-                body = {
+                merge_data = {
                     'first_name': form.cleaned_data['first_name'],
                     'last_name': form.cleaned_data['last_name'],
                     'email': form.cleaned_data['email'],
                     'subject': form.cleaned_data['subject'],
                     'message': form.cleaned_data['message'],
                 }
-                message = "\n".join(body.values())
-
+                html_body = render_to_string("email/email-contact-inlined.html", context=merge_data)
+                text_body = "\n".join(merge_data.values())
+                form.save()
                 try:
-                    send_mail(subject, message, 'dirkornee@hotmail.com', ['dirkrnee@icloud.com'])
+                    msg = EmailMultiAlternatives(subject=subject, body=text_body, from_email='dirkrnee@icloud.com', to=[form.cleaned_data['email']])
+                    msg.attach_alternative(html_body, "text/html")
+                    msg.send()
                 except BadHeaderError:
                     return HttpResponse('Invalid header found.')
                 return HttpResponseRedirect('contact')

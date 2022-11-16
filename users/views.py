@@ -56,9 +56,25 @@ class Dashboard(View):
         
         if request.POST.get('appointment_id', default=None):
             appointment_id = request.POST.get('appointment_id')
-            appointment = Appointment.objects.filter(id=appointment_id)
-            if request.user.email == Appointment.objects.get(id=appointment_id).email:
+            appointment = Appointment.objects.get(id=appointment_id)
+            if request.user.email == appointment.email:
                 appointment.delete()
+                subject = "Nailsbyfaar appointment canceled."
+                merge_data = {
+                    'treatment': appointment.treatment_name.title,
+                    'date': appointment.date_time.strftime("%A %d %B %Y, %H:%M"),
+                    'first_name': appointment.first_name,
+                    'last_name': appointment.last_name,
+                    'email': appointment.email,
+                }
+                html_body = render_to_string("email/email-book-canceled-inlined.html", context=merge_data)
+                text_body = "\n".join(merge_data.values())
+                try:
+                    msg = EmailMultiAlternatives(subject=subject, body=text_body, from_email='dirkrnee@icloud.com', to=[appointment.email])
+                    msg.attach_alternative(html_body, "text/html")
+                    msg.send()
+                except BadHeaderError:
+                    return HttpResponse('Invalid header found.')
                 return HttpResponseRedirect("dashboard")
             else:
                 return HttpResponseRedirect("dashboard")
