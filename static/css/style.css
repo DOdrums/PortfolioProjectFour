@@ -65,6 +65,10 @@ ul li {
     --bs-dropdown-link-hover-color: #a17772;
 }
 
+div#map {
+    min-height: 360px;
+}
+
 .card-title {
     color: #c88686;
 }

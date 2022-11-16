@@ -96,7 +96,7 @@
         <div class="container pt-5">
             <div class="row">
                 <div class="col-lg-4 mb-4">
-                    <h4 class="mb-4 text-white">map</h4>
+                    <div id="map"></div>
                 </div>
                 <div class="col-lg-4 mb-4">
                     <h4 class="mb-4 text-white">contact info</h4>
@@ -104,8 +104,8 @@
                         <li class="fa-li mb-4 text-nowrap">
                             <span><i class="fas fa-home"></i>
                             </span><span class="ms-2">Den
-                                Haag, Denhaagstraat 3,
-                                1111DH</span>
+                                Haag, Architect Krophollerkade 29,
+                                2552ZS</span>
                         </li>
                         <li class="fa-li mb-4 text-nowrap">
                             <span><i class="fas fa-envelope"></i></span><span
@@ -150,6 +150,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous">
     </script>
+    <script
+        src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+    </script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDD-efmh4DvzV8lHVCCTX7i7WTkcpLqZBU&callback=initMap">
+    </script>
+    <script src="{% static 'js/maps.js' %}"></script>
 </body>
 
 </html>
