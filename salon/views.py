@@ -58,7 +58,7 @@ class BookingModule(View):
             text_body = "\n".join(merge_data.values())
             form.save()
             try:
-                msg = EmailMultiAlternatives(subject=subject, body=text_body, from_email='dirkornee@hotmail.com', to=['dirkrnee@icloud.com'])
+                msg = EmailMultiAlternatives(subject=subject, body=text_body, from_email='dirkrnee@icloud.com', to=[form.cleaned_data['email']])
                 msg.attach_alternative(html_body, "text/html")
                 msg.send()
             except BadHeaderError:

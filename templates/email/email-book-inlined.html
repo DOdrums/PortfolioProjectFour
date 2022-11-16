@@ -89,19 +89,19 @@
             }
 
             .btn-primary table td:hover {
-                background-color: #34495e !important;
+                background-color: #A17772 !important;
             }
 
             .btn-primary a:hover {
-                background-color: #34495e !important;
-                border-color: #34495e !important;
+                background-color: #A17772 !important;
+                border-color: #A17772 !important;
             }
         }
     </style>
 </head>
 
 <body
-    style="background-color: #f6f6f6; font-family: sans-serif; -webkit-font-smoothing: antialiased; font-size: 14px; line-height: 1.4; margin: 0; padding: 0; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;">
+    style="background-color: #f6f6f6; font-family: sans-serif; -webkit-font-smoothing: antialiased; font-size: 15px; line-height: 1.4; margin: 0; padding: 0; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;">
     <span class="preheader"
         style="color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;">Thank
         you for your booking!</span>
@@ -109,39 +109,51 @@
         style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #f6f6f6; width: 100%;"
         width="100%" bgcolor="#f6f6f6">
         <tr>
-            <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;" valign="top">&nbsp;</td>
+            <td style="font-family: sans-serif; font-size: 15px; vertical-align: top;" valign="top">&nbsp;</td>
             <td class="container"
-                style="font-family: sans-serif; font-size: 14px; vertical-align: top; display: block; max-width: 580px; padding: 10px; width: 580px; margin: 0 auto;"
+                style="font-family: sans-serif; font-size: 15px; vertical-align: top; display: block; max-width: 580px; padding: 10px; width: 580px; margin: 0 auto;"
                 width="580" valign="top">
                 <div class="content"
                     style="box-sizing: border-box; display: block; margin: 0 auto; max-width: 580px; padding: 10px;">
 
                     <!-- START CENTERED WHITE CONTAINER -->
                     <table role="presentation" class="main"
-                        style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; background: #ffffff; border-radius: 3px; width: 100%;"
+                        style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; background: rgba(224, 189, 177, 0.54); border-radius: 3px; width: 100%;"
                         width="100%">
 
                         <!-- START MAIN CONTENT AREA -->
                         <tr>
                             <td class="wrapper"
-                                style="font-family: sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: 20px;"
+                                style="font-family: sans-serif; font-size: 15px; vertical-align: top; box-sizing: border-box; padding: 20px;"
                                 valign="top">
+                                <div style="margin: 0 auto; width: 160px;">
+                                    <img src="https://res.cloudinary.com/dirkornee/image/upload/v1666360592/logo-no-background_thicker_s1qwll.png"
+                                        alt="brand-logo"
+                                        style="border: none; -ms-interpolation-mode: bicubic; max-width: 160px;">
+                                </div>
                                 <table role="presentation" border="0" cellpadding="0" cellspacing="0"
                                     style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;"
                                     width="100%">
                                     <tr>
-                                        <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;"
+                                        <td style="font-family: sans-serif; font-size: 15px; vertical-align: top;"
                                             valign="top">
                                             <p
-                                                style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;">
-                                                Hi there,</p>
+                                                style="font-family: sans-serif; color: rgb(115, 115, 115); font-size: 15px; font-weight: normal; margin: 0; margin-bottom: 15px;">
+                                                Hi {{ first_name }},</p>
                                             <p
-                                                style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;">
-                                                Thank you for booking an appointment with Nailsbyfaar. On
-                                                {{ date }} you'll get a {{ treatment }} treatment!
-                                                If you want
-                                                to edit your info, click the button below to make an account or login.
+                                                style="font-family: sans-serif; color: rgb(115, 115, 115); font-size: 15px; font-weight: normal; margin: 0; margin-bottom: 15px;">
+                                                Thank you for booking an appointment with Nailsbyfaar! Let's review your
+                                                booking:
                                             </p>
+                                            <p
+                                                style="font-family: sans-serif; color: rgb(115, 115, 115); font-size: 15px; font-weight: normal; margin: 0; margin-bottom: 15px;">
+                                                Date: {{ date }}<br>
+                                                Treatment: {{ treatment }}<br>
+                                                Name: {{ first_name }} {{ last_name }}
+                                            </p>
+                                            <p
+                                                style="font-family: sans-serif; color: rgb(115, 115, 115); font-size: 15px; font-weight: normal; margin: 0; margin-bottom: 15px;">
+                                                Want to change anything? Hit the Login button to go to your account.</p>
                                             <table role="presentation" border="0" cellpadding="0" cellspacing="0"
                                                 class="btn btn-primary"
                                                 style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; box-sizing: border-box; width: 100%;"
@@ -149,20 +161,20 @@
                                                 <tbody>
                                                     <tr>
                                                         <td align="left"
-                                                            style="font-family: sans-serif; font-size: 14px; vertical-align: top; padding-bottom: 15px;"
+                                                            style="font-family: sans-serif; font-size: 15px; vertical-align: top; padding-bottom: 15px;"
                                                             valign="top">
                                                             <table role="presentation" border="0" cellpadding="0"
                                                                 cellspacing="0"
                                                                 style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: auto;">
                                                                 <tbody>
                                                                     <tr>
-                                                                        <td style="font-family: sans-serif; font-size: 14px; vertical-align: top; border-radius: 5px; text-align: center; background-color: #3498db;"
+                                                                        <td style="font-family: sans-serif; font-size: 15px; vertical-align: top; border-radius: 5px; text-align: center; background-color: #BC8180;"
                                                                             valign="top" align="center"
-                                                                            bgcolor="#3498db"> <a
-                                                                                href="http://htmlemail.io"
+                                                                            bgcolor="#BC8180"> <a
+                                                                                href="https://nailsbyfaar.herokuapp.com/user/dashboard"
                                                                                 target="_blank"
-                                                                                style="border: solid 1px #3498db; border-radius: 5px; box-sizing: border-box; cursor: pointer; display: inline-block; font-size: 14px; font-weight: bold; margin: 0; padding: 12px 25px; text-decoration: none; text-transform: capitalize; background-color: #3498db; border-color: #3498db; color: #ffffff;">Call
-                                                                                To Action</a> </td>
+                                                                                style="border: solid 1px #BC8180; border-radius: 5px; box-sizing: border-box; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; margin: 0; padding: 12px 25px; text-decoration: none; text-transform: capitalize; background-color: #BC8180; border-color: #BC8180; color: #ffffff;">Login</a>
+                                                                        </td>
                                                                     </tr>
                                                                 </tbody>
                                                             </table>
@@ -171,10 +183,10 @@
                                                 </tbody>
                                             </table>
                                             <p
-                                                style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;">
-                                                We hope you'll have the best time getting you nails done!</p>
+                                                style="font-family: sans-serif; color: rgb(115, 115, 115); font-size: 15px; font-weight: normal; margin: 0; margin-bottom: 15px;">
+                                                We hope you'll have the best time getting your nails done!</p>
                                             <p
-                                                style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;">
+                                                style="font-family: sans-serif; color: rgb(115, 115, 115); font-size: 15px; font-weight: normal; margin: 0; margin-bottom: 15px;">
                                                 See you soon.</p>
                                         </td>
                                     </tr>
@@ -196,8 +208,9 @@
                                     style="font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; color: #999999; font-size: 12px; text-align: center;"
                                     valign="top" align="center">
                                     <span class="apple-link"
-                                        style="color: #999999; font-size: 12px; text-align: center;">Den Haag straat, 21
-                                        Den Haag, Nederland</span>
+                                        style="color: #999999; font-size: 12px; text-align: center;">Architect
+                                        Krophollerkade 29, 2552ZS Den Haag,
+                                        Nederland</span>
                                     <br> Don't like these emails? <a href="http://i.imgur.com/CScmqnj.gif"
                                         style="text-decoration: underline; color: #999999; font-size: 12px; text-align: center;">Unsubscribe</a>.
                                 </td>
@@ -208,7 +221,7 @@
 
                 </div>
             </td>
-            <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;" valign="top">&nbsp;</td>
+            <td style="font-family: sans-serif; font-size: 15px; vertical-align: top;" valign="top">&nbsp;</td>
         </tr>
     </table>
 </body>
