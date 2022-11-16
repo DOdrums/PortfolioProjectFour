@@ -1,6 +1,8 @@
 from datetime import datetime, timedelta
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
+from django.core.mail import BadHeaderError, EmailMultiAlternatives
+from django.template.loader import render_to_string
 from django.urls import reverse
 from django.views import View
 from users.forms import EditUserForm
@@ -88,7 +90,7 @@ class Dashboard(View):
 class EditAppointment(View):
 
     def get(self, request, slug):
-        if request.user.email == Appointment.objects.get(id=slug).email: 
+        if request.user.email == Appointment.objects.get(id=slug).email:
             treatment_id = Appointment.objects.get(id=slug).treatment_name
             appointment_date = Appointment.objects.get(id=slug).date_time
             appointment_date = appointment_date.strftime("%d-%m-%Y %H:%M")
@@ -116,6 +118,28 @@ class EditAppointment(View):
     def post(self, request, slug):
         form = EditAppointmentForm(request.POST, instance=Appointment.objects.get(id=slug))
         if form.is_valid():
+            subject = "Nailsbyfaar updated booking"
+            if form.cleaned_data['phone_number']:
+                phone = form.cleaned_data['phone_number']
+            else:
+                phone = "-"
+            merge_data = {
+                'treatment': form.cleaned_data['treatment_name'].title,
+                'date': form.cleaned_data['date_time'].strftime("%A %d %B %Y, %H:%M"),
+                'first_name': form.cleaned_data['first_name'],
+                'last_name': form.cleaned_data['last_name'],
+                'email': form.cleaned_data['email'],
+                'phone': phone,
+            }
+            html_body = render_to_string("email/email-book-edited-inlined.html", context=merge_data)
+            text_body = "\n".join(merge_data.values())
+            form.save()
+            try:
+                msg = EmailMultiAlternatives(subject=subject, body=text_body, from_email='dirkrnee@icloud.com', to=[form.cleaned_data['email']])
+                msg.attach_alternative(html_body, "text/html")
+                msg.send()
+            except BadHeaderError:
+                return HttpResponse('Invalid header found.')
             form.save()
             return HttpResponseRedirect(reverse("dashboard"))
         else:
