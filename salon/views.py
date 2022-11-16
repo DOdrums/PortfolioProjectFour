@@ -123,7 +123,6 @@ class Contact(View):
                 }
                 html_body = render_to_string("email/email-contact-inlined.html", context=merge_data)
                 text_body = "\n".join(merge_data.values())
-                form.save()
                 try:
                     msg = EmailMultiAlternatives(subject=subject, body=text_body, from_email='dirkrnee@icloud.com', to=[form.cleaned_data['email']])
                     msg.attach_alternative(html_body, "text/html")
