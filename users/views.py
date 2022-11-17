@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+import json
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from django.core.mail import BadHeaderError, EmailMultiAlternatives
@@ -8,53 +9,83 @@ from django.views import View
 from users.forms import EditUserForm
 from users.forms import EditAppointmentForm
 from salon.models import Appointment, Treatment, Planning
-from users.models import User
-import json
 
 class Dashboard(View):
+    """
+    View to with get and post method for User dashboard.
+    """
 
     def get(self, request):
+        """
+        Get method to get user data and their appointments.
+        Data is formatted server side to be displayed in a user readable way.
+        """
         user_dict = {}
         if request.user.is_authenticated:
-            user_dict = {'email': request.user.email, 'first_name': request.user.first_name, 'last_name': request.user.last_name, 'phone_number': request.user.phone_number}
+            user_dict = {
+                'email': request.user.email,
+                'first_name': request.user.first_name,
+                'last_name': request.user.last_name,
+                'phone_number': request.user.phone_number
+                }
         else:
-           return HttpResponseRedirect(reverse("account_login")) 
-        
+            return HttpResponseRedirect(reverse("account_login"))
+
         user_form = EditUserForm(initial=user_dict)
 
         yesterday = datetime.today() - timedelta(days=1)
 
-        appointmentQueryset1 = Appointment.objects.filter(date_time__gt=yesterday).filter(user__email=request.user.email).order_by("date_time").values()
-        appointmentQueryset2 = Appointment.objects.filter(date_time__gt=yesterday).filter(email=request.user.email).order_by("date_time").values()
-        appointmentQueryset = list(appointmentQueryset1 | appointmentQueryset2)
-        for dict in appointmentQueryset:
+        appointment_queryset_1 = Appointment.objects.filter(
+            date_time__gt=yesterday).filter(
+                user__email=request.user.email).order_by(
+                    "date_time").values()
+        appointment_queryset_2 = Appointment.objects.filter(
+            date_time__gt=yesterday).filter(
+                email=request.user.email).order_by(
+                    "date_time").values()
+        appointment_queryset = list(appointment_queryset_1 | appointment_queryset_2)
+
+        for dict in appointment_queryset:
             date = dict["date_time"]
             check_date = datetime.now() + timedelta(days=2)
- 
+
             if date <= check_date:
+                # appointments that are closer than 48 hours to today cannot be canceled
                 dict["not_cancellable"] = True
-                print("don't cancel me")
             dict["date_time_short"] = dict["date_time"].strftime("%A %d %B, %H:%M")
             dict["date_time"] = dict["date_time"].strftime("%A %d %B %Y, %H:%M")
             dict["duration"] = int(Treatment.objects.get(id=dict['treatment_name_id']).duration)
             dict["treatment_name"] = Treatment.objects.get(id=dict['treatment_name_id']).title
-        context = {"user_form": user_form, "appointments": appointmentQueryset}
+        context = {"user_form": user_form, "appointments": appointment_queryset}
         return render(request, "user-dashboard.html", context=context)
-    
+
     def post(self, request):
+        """
+        Post method for user dashboard, with multiple options:
+        - Posting new user data (changed name, phone or email),
+        - posting a canceled appointment to database (removing the object),
+        """
 
         yesterday = datetime.today() - timedelta(days=1)
 
-        appointmentQueryset1 = Appointment.objects.filter(date_time__gt=yesterday).filter(user__email=request.user.email).order_by("date_time").values()
-        appointmentQueryset2 = Appointment.objects.filter(date_time__gt=yesterday).filter(email=request.user.email).order_by("date_time").values()
-        appointmentQueryset = list(appointmentQueryset1 | appointmentQueryset2)
-        for dict in appointmentQueryset:
+        appointment_queryset_1 = Appointment.objects.filter(
+            date_time__gt=yesterday).filter(
+                user__email=request.user.email).order_by(
+                    "date_time").values()
+        appointment_queryset_2 = Appointment.objects.filter(
+            date_time__gt=yesterday).filter(
+                email=request.user.email).order_by(
+                    "date_time").values()
+        appointment_queryset = list(appointment_queryset_1 | appointment_queryset_2)
+
+        for dict in appointment_queryset:
             dict["date_time_short"] = dict["date_time"].strftime("%A %d %B, %H:%M")
             dict["date_time"] = dict["date_time"].strftime("%A %d %B %Y, %H:%M")
             dict["duration"] = int(Treatment.objects.get(id=dict['treatment_name_id']).duration)
             dict["treatment_name"] = Treatment.objects.get(id=dict['treatment_name_id']).title
-        
+
         if request.POST.get('appointment_id', default=None):
+            # deletes appointment and sends email to user
             appointment_id = request.POST.get('appointment_id')
             appointment = Appointment.objects.get(id=appointment_id)
             if request.user.email == appointment.email:
@@ -67,10 +98,16 @@ class Dashboard(View):
                     'last_name': appointment.last_name,
                     'email': appointment.email,
                 }
-                html_body = render_to_string("email/email-book-canceled-inlined.html", context=merge_data)
+                html_body = render_to_string(
+                    "email/email-book-canceled-inlined.html", context=merge_data
+                    )
                 text_body = "\n".join(merge_data.values())
                 try:
-                    msg = EmailMultiAlternatives(subject=subject, body=text_body, from_email='dirkrnee@icloud.com', to=[appointment.email])
+                    msg = EmailMultiAlternatives(
+                        subject=subject,
+                        body=text_body,
+                        from_email='dirkrnee@icloud.com',
+                        to=[appointment.email])
                     msg.attach_alternative(html_body, "text/html")
                     msg.send()
                 except BadHeaderError:
@@ -78,9 +115,9 @@ class Dashboard(View):
                 return HttpResponseRedirect("dashboard")
             else:
                 return HttpResponseRedirect("dashboard")
-            
 
         if request.POST.get('first_name', default=None):
+            # edit user info and save to database, then re-render dashboard
             form = EditUserForm(data=request.POST, instance=request.user)
             if form.is_valid():
                 user = form.save(commit=False)
@@ -88,50 +125,91 @@ class Dashboard(View):
 
                 user_dict = {}
                 if request.user.is_authenticated:
-                    user_dict = {'email': request.user.email, 'first_name': request.user.first_name, 'last_name': request.user.last_name, 'phone_number': request.user.phone_number}
+                    user_dict = {
+                        'email': request.user.email,
+                        'first_name': request.user.first_name,
+                        'last_name': request.user.last_name,
+                        'phone_number': request.user.phone_number
+                        }
                 else:
                     user_dict = {}
-                
+
                 user_form = EditUserForm(initial=user_dict)
 
-                context = {"user_form": user_form, "appointments": appointmentQueryset, "saved": True}
+                context = {
+                    "user_form": user_form,
+                    "appointments": appointment_queryset,
+                    "saved": True}
                 return render(request, "user-dashboard.html", context=context)
             else:
-                user_dict = {'email': request.user.email, 'first_name': request.user.first_name, 'last_name': request.user.last_name, 'phone_number': request.user.phone_number}
+                user_dict = {
+                    'email': request.user.email,
+                    'first_name': request.user.first_name,
+                    'last_name': request.user.last_name,
+                    'phone_number': request.user.phone_number
+                    }
                 user_form = EditUserForm(initial=user_dict)
 
-                context = {"user_form": user_form, "appointments": appointmentQueryset, "not_saved": True}
+                context = {
+                    "user_form": user_form,
+                    "appointments": appointment_queryset,
+                    "not_saved": True}
                 return render(request, "user-dashboard.html", context=context)
 
 class EditAppointment(View):
+    """
+    View to allow user to edit appointment info
+    """
 
     def get(self, request, slug):
+        """
+        Gets all data for selected appointment (slug)
+        """
         if request.user.email == Appointment.objects.get(id=slug).email:
+            # checks if user requesting the change is same as appointment user
             treatment_id = Appointment.objects.get(id=slug).treatment_name
             appointment_date = Appointment.objects.get(id=slug).date_time
             appointment_date = appointment_date.strftime("%d-%m-%Y %H:%M")
-            print(appointment_date)
             user_dict = {}
             treatments = Treatment.objects.filter(title=treatment_id).order_by("title").values()
-            treatments_tuple = [(str(i["id"]) + "," + str(i["duration"]), i["title"] + " - " + str(i["duration"]) + " min - €" + str(i["price"])) for i in treatments]
-            user_dict = {'email': request.user.email, 'first_name': request.user.first_name, 'last_name': request.user.last_name, 'phone_number': request.user.phone_number, 'date_time': appointment_date} 
+            treatments_tuple = [(str(
+                i["id"]) + "," + str(
+                    i["duration"]), i["title"] + " - " + str(
+                        i["duration"]) + " min - €" + str(i["price"])) for i in treatments]
+            user_dict = {
+                'email': request.user.email,
+                'first_name': request.user.first_name,
+                'last_name': request.user.last_name,
+                'phone_number': request.user.phone_number,
+                'date_time': appointment_date
+                }
 
             yesterday = datetime.today() - timedelta(days=1)
-            appointmentQueryset = list(Appointment.objects.filter(date_time__gt=yesterday).order_by("date_time").values())
-            planningQueryset = list(Planning.objects.filter(active=True).order_by("title").values())
+            appointment_queryset = list(Appointment.objects.filter(
+                date_time__gt=yesterday).order_by("date_time").values())
+            planning_queryset = list(Planning.objects.filter(
+                active=True).order_by("title").values())
 
-            for dict in appointmentQueryset:
+            for dict in appointment_queryset:
                 dict["date_time"] = dict["date_time"].isoformat()
-                dict["duration"] = int(Treatment.objects.get(id=dict['treatment_name_id']).duration)
+                dict["duration"] = int(Treatment.objects.get(
+                    id=dict['treatment_name_id']).duration)
 
             form = EditAppointmentForm(initial=user_dict)
             form.fields["treatment_name"].choices = treatments_tuple
-            context = {"planning": json.dumps(planningQueryset), "appointments": json.dumps(appointmentQueryset), "appointment_form": form}
+            context = {
+                "planning": json.dumps(planning_queryset),
+                "appointments": json.dumps(appointment_queryset),
+                "appointment_form": form
+                }
             return render(request, "edit-appointment.html", context=context)
         else:
             return render(request, "book-error.html")
-        
+
     def post(self, request, slug):
+        """
+        Post edited appointment data to database
+        """
         form = EditAppointmentForm(request.POST, instance=Appointment.objects.get(id=slug))
         if form.is_valid():
             subject = "Nailsbyfaar updated booking"
@@ -147,11 +225,17 @@ class EditAppointment(View):
                 'email': form.cleaned_data['email'],
                 'phone': phone,
             }
-            html_body = render_to_string("email/email-book-edited-inlined.html", context=merge_data)
+            html_body = render_to_string(
+                "email/email-book-edited-inlined.html", context=merge_data
+                )
             text_body = "\n".join(merge_data.values())
             form.save()
             try:
-                msg = EmailMultiAlternatives(subject=subject, body=text_body, from_email='dirkrnee@icloud.com', to=[form.cleaned_data['email']])
+                msg = EmailMultiAlternatives(
+                    subject=subject, body=text_body,
+                    from_email='dirkrnee@icloud.com',
+                    to=[form.cleaned_data['email']]
+                    )
                 msg.attach_alternative(html_body, "text/html")
                 msg.send()
             except BadHeaderError:
@@ -159,6 +243,5 @@ class EditAppointment(View):
             form.save()
             return HttpResponseRedirect(reverse("dashboard"))
         else:
-            print(form.errors)
             form = EditAppointmentForm()
             return HttpResponseRedirect("book-error")

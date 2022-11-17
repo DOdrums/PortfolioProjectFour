@@ -23,5 +23,10 @@
    "files.autoSave": "off",
    "workbench.colorTheme": "Visual Studio Dark",
    "terminal.integrated.gpuAcceleration": "canvas",
-   "editor.defaultFormatter": "HookyQR.beautify"
+   "editor.defaultFormatter": "HookyQR.beautify",
+   "python.formatting.provider": "black",
+   "python.formatting.autopep8Args": [
+      "--line-length",
+      "119"
+   ]
 }
