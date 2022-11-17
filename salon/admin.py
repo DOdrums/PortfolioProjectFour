@@ -17,7 +17,9 @@ class PlanningAdmin(admin.ModelAdmin):
 @admin.register(Appointment)
 class AppointmentAdmin(admin.ModelAdmin):
 
-    list_display = ['date_time', 'get_end_time', 'get_treatment_duration', 'get_treatment_title']
+    list_display = ['date_time', 'get_end_time', 'get_treatment_title', 'first_name', 'last_name', 'email']
+    list_filter = ('first_name', 'last_name', 'email')
+    search_fields = ['first_name', 'last_name', 'email']
     ordering = ['-date_time']
 
     @admin.display(description="Treatment")
