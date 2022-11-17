@@ -108,8 +108,7 @@
                                     </button>
                                 </div>
                                 {% endif %}
-                                <input name="appointment_id" value="{{ appointment.id }}"
-                                    style="display: none;"></input>
+                                <input name="appointment_id" value="{{ appointment.id }}" style="display: none;">
                             </form>
                         </div>
                     </div>
@@ -118,6 +117,7 @@
             </div>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="{% static 'js/dashboard.js' %}"></script>
-    {% endblock %}
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="{% static 'js/dashboard.js' %}"></script>
+{% endblock %}
