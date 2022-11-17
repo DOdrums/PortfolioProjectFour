@@ -103,7 +103,7 @@ div#map {
     right: 0;
     left: 0;
     height: 3px;
-    background: linear-gradient(left, transparent, rgba(0, 0, 0, .02), rgba(0, 0, 0, .02), transparent);
+    background: linear-gradient(to left, transparent, rgba(0, 0, 0, .02), rgba(0, 0, 0, .02), transparent);
 }
 
 /* homepage */
