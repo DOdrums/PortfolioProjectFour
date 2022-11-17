@@ -6,6 +6,7 @@ $('#id_last_name').prop("disabled", true);
 $('#id_email').prop("disabled", true);
 $('#id_phone_number').prop("disabled", true);
 
+
 // add eventlistener to submit button, which calls submitForm function.
 document.getElementById('user-data-form').addEventListener("submit", submitForm);
 
