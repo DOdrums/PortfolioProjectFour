@@ -1,64 +1,74 @@
 # Smart House Inventory
 
-## Portfolio Project 3: Python Essentials
+## Portfolio Project 4: Full Stack Toolkit
 
-![Multi screen mockup](assets/images/mockup.png)
+![Multi screen mockup](static/images/multi-device-mockup.png)
 
-This project is built as part of the Code Institute Full Stack Software Development course. For this course, Dirk Ornee had to built a fourth Portfolio Project. Since his cousin just started a nail salon and was in dire need of a website with booking module, what better way to build a fourth Portfolio Project and help somebody at the same time!
+This project is built as part of the Code Institute Full Stack Software Development course. For this course, Dirk Ornee had to built a fourth Portfolio Project. Since his cousin just started a nail salon and was in dire need of a website with booking capabilities, what better way to build a fourth Portfolio Project and help somebody at the same time! Important note: this is not the actual live version that is used by the nail salon, this version is used purely as a project for Code Institute and users can book appointments freely (you won't suddenly be expected to show up at a nail salon).
+
 ## Live Site
 
-[Smart House Inventory](https://smart-house-inventory.herokuapp.com/)
+[NailsbyFaar](https://nailsbyfaar.herokuapp.com/)
 
 ## Github Repository
 
-[PortfolioProjectThree](https://github.com/DOdrums/PortfolioProjectThree)
+[PortfolioProjectFour](https://github.com/DOdrums/PortfolioProjectFour)
 
 
 ## UX
 
 ### Business Goals
 
-The goal of this project is to assist a user in keeping track of their house inventory and getting insights into when they should run out to the store to replenish some of their favorite products. It's built as a single user application, but could be forked and used with personal a Google Sheets account.
+The main goal of this project is to give a user the ability to book appointments at the NailsbyFaar nail salon. User should also get a good feeling for the salon and know what to expect from the treatments. If the user books an appointment, they should be able to make updates to their appointments in a user dashboard.
 
 ### Target Audience
 
-I think a lot of people recognize the feeling of opening their fridge and finding their beautiful salmon or steak has sadly expired. Or perhaps you want to turn on the dishwasher at night and find yourself out of dishwasher tablets. Even worse, you are in the bathroom and have only one sheet of toilet paper left. Awkward and wasteful situations that can easily be prevented! With the smart house inventory you can easily generate an inventory with estimations when to get new products and neatly keep track of their expiry dates. So, this app is for anybody who whishes to keep better track of their house inventory.
+It might be obvious, but the target audience of this website is people who love getting their nails done! There isn't much more to be said about it, it can be people who go get their nails done for the first time, people who've gotten their nails done hundreds of times or people who are recurring customers at this specific salon. As long as they like pretty nails!
 
 ### User Stories
 
-#### As the owner
+User stories were written together with salon owner and were all written to fit within the agile methodology. They have the following criteria:
 
-* I want to build a helpful tool so users can better manage the inventory in their house.
-* I want the user to waste less food.
-* I want the user to not run out of products.
-* I want the user to have a clear and well structured visual of their stock.
+* title
+* clear description
+* acceptance criteria
+* tasks, when acceptance criteria alone weren't clear enough
+* story points
+* epic
+* priority (must have, should have, could have)
 
-#### As a new user
+In the picture below you can see an example of the user stories before work on the project was started:
 
-* I want to understand the purpose of the app straight away, even if I stumbled upon it randomly.
-* I want to intuitively navigate the app and have clear explanations about each section and function.
-* I want to manage the stock in my house.
-* I want the app to be smart and do things automatically for me.
+![user stories board](static/images/user-stories-1.png)
 
-#### As a returning user
+And the user stories board after finishing the project:
 
-* I want to be able to use the app in a quick way, without having to scroll trough needless explanations and options.
-* I want to get an update about my stock each time I open the app.
-* I want to get insights from the app about my stock and what I should do.
+![user stories board updated](static/images/user-stories-2.png)
+
+As you can see, only one user story was left, which didn't fit in the scope of the project in the end. Since it was a 'could have' the decision to leave it out was easily made. To view all the user stories in detail, visit the project page: [user stories board](https://github.com/users/DOdrums/projects/3/views/1)
+
 
 ### Structure of the app
 
-The app is designed to have a good flow, with clear options explained in a short and concise way. Inventory explanations is purposefully put on top, so returning users don't have to scroll through it every time to get to their inventory. The inventory is fully editable and products can be added to both lists easily.
+The app is designed to have a natural flow, with a strong focus on the booking functionality. Most pages include booking buttons or calls to book an appointment. The home page specifically features a booking button right on top, so a user doesn't have to scroll at all to make an appointment. This is especially handy and necessary for recurring customers, who will be the gross of the clientele.
 
-### Logic
+### Logic/Database Diagram
 
-A flowchart was created to make the business logic more clear and as a guide while building the project. Notably missing are the delete and edit function in the inventory and the explanation function on the main page, since this flowchart was created at the start of the process and not updated throughout.
+The logic of the app was thought out by making a database diagram, to visualize which objects will need to be created for this app to be functional and how they will be connected to each other. Notably, the initial database diagram was incomplete, which was discovered during production of the app. See the images below:
 
-![flowchart](assets/images/flowchart.jpg)
+Initial database diagram:
+
+![database diagram](static/images/database-diagram.png)
+
+Updated database diagram:
+
+![database diagram](static/images/database-diagram-updated.png)
 
 ### Color Scheme
 
-Although colors are used on a few lines of text, no real color scheme was used. The text displays either purple, cyan or white.
+The color scheme of the salon itself was used, see the image below. It creates a very feminine and calm look, which perfectly fits the nail polish theme.
+
+![color scheme](static/images/color-scheme.png)
 
 ### Features
 
@@ -106,27 +116,11 @@ If user pressed R in their inventory, they will return to the home/main page of 
 
 ### Future Features
 
-For this app there are two important future features that would greatly increase it's usability.
-
-#### Multi-user support
-
-Include a login page, so users can have their personal google sheet connected without forking the code into their own project. This would probably work better with a general database instead of google sheets though.
+An important feature for the admin, is a link to a google agenda that displays all appointments in a calender. This way, there is a clear and easy oversight in the planning. This was also the only remaining user story.
 
 #### Notifications
 
-It would be great if a user could enter their email, telephone number or other communication channel, to get notified whenever a product almost runs out. They could also set a daily (or other interval) mail with their inventory.
-
-#### Expiry date warning
-
-Last functionality that could be worthwhile, is to add a feature that notifies the user when the expiry date comes close. This could be either inside the inventory, or via mail/phone etc.
-
-## Data Model
-
-As a data model the app uses a Product class. An instance of this class is created everytime a product is made. It will hold the name, quantity and days per use of the product and generate a date added. The Food class inherits from the Product class and extends it with a expiry date. The Product class also holds the add_product method, which adds the product to the google sheet whenever it's called. The google sheet stores any date. Below are pictures of both sheets that are used for the Food and Item inventory.
-
-![food sheet](assets/images/sheet-food.png)
-
-![item sheet](assets/images/sheet-item.png)
+Users can already receive notifications via email, but it would be great to have the option of enabling sms notifications, since these tend to reach the user better (no danger of ending up in the spam folder).
 
 
 ## Credits
@@ -149,11 +143,10 @@ As a data model the app uses a Product class. An instance of this class is creat
 * [Github(responsive-html-email-template)]https://github.com/leemunroe/responsive-html-email-template) - for a basic html template for emailing.
 
 
-
 ### Images
 
 All images used in the readme are screenshots of the project and a multi device mock up generated with [mockup generator](https://techsini.com/multi-mockup/index.php)
-The app itself does not contain any images.
+Images inside the app are either royalty free stock imagery, or courtesy of NailsbyFaar.
 
 ### Technologies used
 
