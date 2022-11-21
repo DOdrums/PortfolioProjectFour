@@ -64,6 +64,42 @@ Updated database diagram:
 
 ![database diagram](static/images/database-diagram-updated.png)
 
+Django's Class-Based Generic Views were used, to build the models in an Object Oriented way. For the User model specifically, the Django package 'AllAuth' was used. This does a lot of the work for you, like creating unstyled login, sign-up and forgot password pages and functionality and creating the User model and User Manager model. For the purposes of this project, these two models had to be overridden, since a email address is used for authentication, instead of a username. Furthermore, phone number was added to  the user model.
+
+Let's quickly go through the other models:
+
+The Treatment model:
+
+* used to make a treatment object (the different kind of available treatments at the salon).
+* has a 'display' parameter, meaning: to be displayed on the homepage and treatments page or not.
+* has an 'active' parameter, meaning: to be displayed in the booking tool or not.
+* images are stored in Cloudinary via a CloudinaryField.
+
+The User model:
+
+* built with Django AllAuth.
+* added phone_number, first_name and last_name.
+
+The Appointment model:
+
+* has foreign key relationships with the user model and treatment model.
+* any appointment will always have a treatment object selected as a foreign key.
+* any appointment can have a user selected as foreign key.
+
+The Planning model:
+
+* is used to configure available/bookable times in the datepicker
+* allow_times takes a comma separated list of time values, for example: 10:00, 10:15, 10:30 etc. This indicates which times on any given day are bookable.
+* disabled_days takes a comma separated list of dates, for example: 10.10.2022, 10.11.2022, 10.12.2022, etc. This indicates days that are off, like holidays.
+* disabled_weekdays takes a comma separated list of numbers, for example: 0, 3, 6. This indicates, with sunday starting at value '0', the days in any given week that are off. So, in the example given, sunday, wednesday and saturday are off days. This will repeat every week.
+* in the datepicker itself, all available times are calculated by using the values available in the active Planning Object and by removing any times from the datepicker where appointments already exist.
+
+The Gallery model:
+
+* used to upload images to Cloudinary, for use on the gallery page.
+* can be added, removed and set to active from the admin panel.
+
+
 ### Color Scheme
 
 The color scheme of the salon itself was used, see the image below. It creates a very feminine and calm look, which perfectly fits the nail polish theme.
@@ -72,47 +108,133 @@ The color scheme of the salon itself was used, see the image below. It creates a
 
 ### Features
 
-The app is divided into two main sections, 'show/edit inventory' and 'add a product'. These two sections together hold all the features of the app. The third option is a explanation page and the last is simply to quit the app.
+The app's biggest feature is of course the booking page and consequently, the user dashboard. These two pages are all you need, to book an appointment, cancel the booked appointment or change its date. This is where we will start our journey:
 
-#### Main page
+#### Book page
 
-This page shows a short introduction of the app and gives you the option to either show your inventory, add a product or get an explanation of the full app. New users are encouraged to read the explanation first.
+This page is where most users, especially the recurring ones, will spent the grunt of their time. When you first open the page, you will be welcomed by a simple form with datepicker. You are urged to select a treatment first, since the duration of the treatment is relevant for which times are bookable.
 
-![main page](assets/images/app-home.png)
+![book page](static/images/book.png)
 
-#### Explanation
+After selecting a treatment, the datepicker will become fully visible and usable and users can now select a date. When you select a date, the available times in the time picker will be rendered and user can scroll through the available times. After user picks a time, the time gets entered automatically in the date field of the booking form. The other fields in the form are either auto-filled when user is logged in, or filled in by user upon booking.
 
-So, after you first open the app, you will most likely navigate to the explanation page. This is simply a page with an explanation of most of the features in this app. The inventory will show some extra explanation for each individual column.
+![book page treatment selected](static/images/book-selected-treatment.png)
 
-![explanation](assets/images/app-explanation.png)
+After hitting the book button, user will get confirmation of their booking and are urged to go to their account dashboard.
 
-#### Inventory
+![book page confirmation](static/images/book-confirmation.png)
 
-After reading the explanation, user is encouraged to visit the inventory. Here they can find the products (if any were added already) and read more about each individual column.
+#### User dashboard
 
-![inventory](assets/images/app-inventory.png)
+When the user goes to their account dashboard, they are greeted by two sections: a personal info section and a section with all their booked appointments (if any).
 
-![inventory](assets/images/app-inventory-options.png)
+![user dashboard](static/images/dashboard.png)
 
-#### Edit
+By default, the user's personal info is not editable, to limit the chance of user-error. If the user decides they want to chance some of their info, they can hit the edit button, which will cause the 'First name', 'Last name' and 'Phone number' field to pop open.
 
-After being presented with the inventory options, if user presses E, they can edit certain fields in the inventory. They will be guided through a series of questions, depending on the option they choose.
+![user dashboard personal info edit](static/images/dashboard-personal-info.png)
 
-![edit](assets/images/app-edit.png)
+After hitting 'save', the fields will now all become uneditable again and a little alert will slide in view confirming the edits were saved to the database. After 4 seconds this alert will slide out of the way, but a user can also close the alert themselves if they wish.
 
-#### Delete
+![user dashboard personal info edit confirmation](static/images/dashboard-personal-info-confirmation.png)
 
-If the user presses D, they can delete one or multiple items of the list.
+On the other side of the dashboard, user will find all their booked appointments. Which they can expand like an 'accordion' by clicking on the element.
 
-![edit](assets/images/app-delete.png)
+![user dashboard booked appointments](static/images/dashboard-appt.png)
 
-#### Add product
+When the date of an appointment is less than 48 hours in the future, it's not possible to change or cancel an appointment, which is indicated by greyed out buttons.
 
-If user pressed R in their inventory, they will return to the home/main page of the app. Here they can hit A to add a product. This will guide them trough a series of questions again, to make sure the user adds the product properly. Each question will also run validations on the users' answers.
+![user dashboard cancel blocked](static/images/dashboard-cancel-blocked.png)
 
-![add](assets/images/app-add-product.png)
+When an appointment lays further in the future, user can can cancel the appointment by clicking on the cancel button.
+When cancel gets clicked, user will be asked to confirm their choice, by a modal that pops up. This is to make sure the user really meant to click the cancel button, since cancelling an appointment by mistake would be very inconvenient.
 
-![add](assets/images/app-add-product2.png)
+![user dashboard cancel modal](static/images/dashboard-cancel.png)
+
+The other button present in the appointment accordions is an 'Change date' button. This button will allow the user to change the date of the appointment. After the clicking the button, they will be redirected to a page similar to the booking page, except the treatment is pre-selected. Furthermore, the only thing they can change if the date.
+
+![user dashboard edit](static/images/dashboard-edit.png)
+
+#### Home
+
+Let's get on with the rest of the website. The home page features a few elements. We'll look at them from top to bottom.
+
+#### Nav bar 
+
+At the top of the page you'll find a nav bar. This bar has two appearances, for being displayed either on top of the hero-image of the homepage, or above the content of the other pages.
+
+![homepage-nav](static/images/nav-home.png)
+
+![homepage-other](static/images/nav-other.png)
+
+The nav bar will display either a login button, or when user is logged in, their name. When user clicks their name, a menu will pop out with the options to log out or go to their user dashboard.
+
+![nav-user-logged-in](static/images/nav-user.png)
+
+#### Hero Image
+
+The hero image will probably be the very first element that catches the users eye when visiting this website. It's a stunning image shot at the Nail Salon.
+
+![hero-image](static/images/home-hero-image.png)
+
+#### Treatments
+
+After user scrolls down a bit, they will see the highlighted treatments. Clicking on the element will bring them to the treatments page, where they can read more about the treatment. Clicking on the book button will bring them to the book page.
+
+![home-treatments](static/images/home-treatments.png)
+
+#### About
+
+Below the treatments, user will find a little text about the salon, with a photo.
+
+![home-about](static/images/home-about.png)
+
+#### Footer
+
+At the bottom of the page, there is a footer. The footer houses a map with the location of NailsbyFaar, some contact info and the social links.
+
+![home-footer](static/images/home-footer.png)
+
+#### About
+
+The next page is the about page. This is simply an extension of the about section on the home page and features an image and some text about the owner of the salon.
+
+![about](static/images/about.png)
+
+#### Treatments
+
+The treatments page features the main treatments with explanations of what they are. There is also a book button for the user to immediately book an appointment.
+
+![treatments](static/images/treatments.png)
+
+#### Gallery 
+
+The gallery page displays a little gallery with some images of recent work done by Nailsbyfaar. On the bottom of the page, the user is encouraged to visit her instagram.
+
+![gallery](static/images/gallery.png)
+
+![gallery-insta](static/images/gallery-insta.png)
+
+#### Contact
+
+The contact page displays a simple form for the user to fill out in order to send a message to the owner.
+
+![contact](static/images/contact.png)
+
+#### Login/Logout
+
+If a user doesn't have an account yet, they can sign up, by filling in the form.
+
+![signup](static/images/sign-up.png)
+
+Once a user has an account, they can login.
+
+![login](static/images/login.png)
+
+If the user wants to logout via the navbar, they'll have to confirm this decision.
+
+![logout](static/images/logout.png)
+
 
 ### Future Features
 
@@ -138,7 +260,7 @@ Users can already receive notifications via email, but it would be great to have
 * [Stackeroverflow(answer from 'fceruti')](https://stackoverflow.com/a/9957402/16545052) - to update a user instances information in the POST method of the Dashboard view.
 * [Stackeroverflow(answer from 'Alex Fuentes')](https://stackoverflow.com/a/25319333/16545052) - to make the alert message that appears when editing user data slide up after 4 seconds. 
 * [Codepen](https://codepen.io/dotproto/pen/mdOXve) - for the css code of a divider used on homepage.
-* [Stackeroverflow(answer from 'Griffosx')](https://stackoverflow.com/a/13624393/16545052) - to check if loop index if even or uneven in treatments page. 
+* [Stackeroverflow(answer from 'Griffosx')](https://stackoverflow.com/a/13624393/16545052) - to check if loop index is even or uneven in treatments page. 
 * [Stackoverflow(answer from 'vee')](https://stackoverflow.com/a/70415401/16545052) - to listen to the mobile navbar events.
 * [Github(responsive-html-email-template)]https://github.com/leemunroe/responsive-html-email-template) - for a basic html template for emailing.
 
@@ -158,11 +280,22 @@ Images inside the app are either royalty free stock imagery, or courtesy of Nail
 
 [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) - for the structure of the website and mocking of the terminal (written by Code Institute)
 
-[Python](https://www.python.org/) - to write all the logic of the app, using the following libraries:
-* Datetime - to generate and manipulate dates easily
-* Math library - to round up the quantity when calculating left over quantity.
-* Re library - for using Regex to validate user input (would've been very verbose otherwise).
-* Gspread and Credentials - for connecting to the google sheet and editing/reading it.
+[Python](https://www.python.org/) - to write all the logic of the app
+
+[Django](https://www.djangoproject.com/) - used as main framework for the app, which both all backend and most frontend elements are built on. The following notable libraries/packages were added to django:
+
+* django-ses: for handling emails with Amazon's SES.
+* django-allauth: for handing all user models and login functionality.
+* cloudinary: for saving images in cloudinary and serving them to the client.
+* django-crispy-forms: for making the django forms look better.
+
+[ElephantSQL](https://www.elephantsql.com/) - used to manage a PostgreSQL database.
+
+[Bootstrap 5.2](https://getbootstrap.com/) - used to style the grunt of the project.
+
+[Jquery](https://jquery.com/) - to make DOM manipulation a bit less painful.
+
+[Lucidchart](https://www.lucidchart.com/pages/) used to make a database diagram.
 
 [Gitpod](https://www.gitpod.io/) - used to connect a browser based VScode to github.
 
@@ -170,31 +303,16 @@ Images inside the app are either royalty free stock imagery, or courtesy of Nail
 
 [Heroku](https://dashboard.heroku.com/) - to deploy the app.
 
-[PEP8 Online](http://pep8online.com/) - to validate the Python code.
+[JShint](https://jshint.com/) - used to validate javascript.
+
+[NuHtmlChecker](https://validator.w3.org/nu/) - used to validate HTML.
 
 [Multi Device Website Mockup Generator](https://techsini.com/multi-mockup/index.php) - to create an image of the website shown on different devices.
 
 ## Testing
 
-Extensive testing was done to make sure all the features work as expected and all validations fire when needed. 
+Extensive testing was done to make sure all the features work as expected. 
 
-### Pep 8 Online
-
-The code was run through the Pep 8 online validator to ensure no obvious errors were left in the code. The validator returned three warnings:
-
-![pep8](assets/images/pep8-validation.png)
-
-After fixing these warnings, no errors were returned:
-
-![pep8 good](assets/images/pep8-good.png)
-
-Futhermore, lighthouse was used to check the websites performance and usability. This returned a subpar SEO score:
-
-![lighthouse](assets/images/lighthouse-bad.png)
-
-This rating was due to the meta tags missing in the html. After adding these meta tags, the score came back much better:
-
-![lighthouse good](assets/images/lighthouse-good.png)
 
 ### Bugs
 
@@ -202,21 +320,63 @@ This rating was due to the meta tags missing in the html. After adding these met
 * The accordion element in the user dashboard would not get rounded borders even when ```border-radius: 2%;``` was set. This was due to the overflow not being hidden. After setting ```overflow: hidden;``` on the same element, the issue was fixed and the border-radius was now displaying properly.
 * The POST method of the Dashboard view was not able to save data on existing users. The ```is_valid()``` validation would complain saying ```email already exists.``` The problem is that the method tried to create a new instance, when email (which is user as Username on the User model) should be unique, so no two users with the same email address can exist. The method however was not supposed to create a new user, but update the existing one. It a while to find the issue, but the solution was actually quite simple: adding ```instance=request.user``` to the EditUserForm() form made the save method work on the specific user.
 
-#### Deployment
+## Deployment
 
-To test the app locally, the terminal within VScode was used. To do this simply enter the command ```python run.py``` to start up the app.
+### Local Deployment
 
-When the project was almost finished, it was deployed to Heroku via the following steps:
-* Create a new app in Heroku.
+To test the app locally, the terminal within VScode was used. The steps to run this:
+
+* In your project workspace folder, open a terminal
+* Run the command: ```python3 manage.py runserver```
+* Hit the 'open browser' button or visit ```http://localhost:8000/``` in the browser.
+* Use the website as usual.
+
+A local database was used for most of the local deployment usage, since it was necessary for the automated tests to run. However, the switch to using the production database could be easily made, in case migrations needed to be performed or otherwise. Furthermore, in the development version, DEBUG was set to False, so error messages would show follow.
+
+### Production Deployment Initial
+
+Before starting work, the project was deployed to Heroku. This was done early in the process, to prevent having to deal with difficulties of deployment close to the project deadline. The following steps needed to be performed:
+
+#### Create Heroku app:
+
+* Login in to Heroku
+* Create a new app.
 * Select "New" and "Create new app".
 * Give the new app a name and click "Create new app".
+* Select a region (Europe for this app).
+
+#### Connect Postgres Database:
+
+* Open your app on the main dashboard of Heroku.
+* Open the Resources tab and scroll to the add-ons section.
+* Type 'Postgres' and select the Heroku Postgres option.
+* Copy the DATABASE_URL in the Config Vars section of the Settings tab.
+* To use the Postgres database in your development environment, copy the DATABASE_URL in your env.py file.
+
+#### Deploy App on Heroku:
+
 * Click "Settings".
 * Navigate to the "Config Vars" section and click "Reveal Config Vars"
-* Add KEY: PORT, VALUE: 8000 and CREDS: "contents of creds.json file" to the config vars section.
-* In the "Buildpacks" add Python and Nodejs.
+* Add SECRET_KEY variable
+* Add CLOUDINARY_URL variable
+* Add AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY variables.
 * Under "Deployment Method" click on "GitHub" to get access to your repository.
-* Enable Automatic Deploys" or "Deploy Branch".
+* Enable Automatic Deploys" or click "Deploy Branch" to deploy your app.
+
+### Production Deployment Update
+
+Since Heroku stopped offering free tiers on the 28th of november 2022, it was necessary to make a few adjustments to the whole production deployment of the app. 
+
+#### PostgreSQL database:
+
+The Postgres database add-on that was previously used within Heroku was now no longer free and thus a different service had to be used. The choice went to [ElephantSQL](https://www.elephantsql.com/), since they offer a free tier. A [script](https://github.com/Code-Institute-Org/postgres-migration-tool) written by Code Institutes team was used to copy the original database to the new database. The steps are described in the [github readme](https://github.com/Code-Institute-Org/postgres-migration-tool) of that script.
+
+After that, the steps were as follows:
+
+* remove database add on from Heroku.
+* remove old DATABASE_URL config var from settings and post new url from ElephantSQL database in its place.
+* transform app from free tier to an eco dyno.
 
 ## Acknowledgements
 
-This website was built as part of the Full Stack Software Development course from Code Institute. I would like to thank my mentor Adeye Adegbenga, for his excellent feedback and guidance throughout the development of the project. I would also like to thank friends and family, who all took a look at the finished project to make sure it worked well and if I could improve things.
+This website was built as part of the Full Stack Software Development course from Code Institute. I would like to thank my mentor Adeye Adegbenga, for his excellent feedback and guidance throughout the development of the project. I would also like to thank friends and family, who all took a look at the finished project to make sure it worked well and checked if I could improve things.
