@@ -346,7 +346,7 @@ Users can already receive notifications via email, but it would be great to have
 * [Codepen](https://codepen.io/dotproto/pen/mdOXve) - for the css code of a divider used on homepage.
 * [Stackeroverflow(answer from 'Griffosx')](https://stackoverflow.com/a/13624393/16545052) - to check if loop index is even or uneven in treatments page. 
 * [Stackoverflow(answer from 'vee')](https://stackoverflow.com/a/70415401/16545052) - to listen to the mobile navbar events.
-* [Github(responsive-html-email-template)]https://github.com/leemunroe/responsive-html-email-template) - for a basic html template for emailing.
+* [Github(responsive-html-email-template)](https://github.com/leemunroe/responsive-html-email-template) - for a basic html template for emailing.
 
 
 ### Images
