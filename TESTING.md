@@ -1,3 +1,31 @@
+<!-- TOC -->
+
+- [Validator Testing](#validator-testing)
+    - [HTML](#html)
+        - [Trailing slash](#trailing-slash)
+        - [Unclosed div](#unclosed-div)
+        - [Bootstrap class outside of class tag](#bootstrap-class-outside-of-class-tag)
+    - [CSS](#css)
+    - [Javascript](#javascript)
+    - [Python](#python)
+    - [Lighthouse](#lighthouse)
+- [Browser Testing](#browser-testing)
+- [Device Testing](#device-testing)
+- [Manual Testing](#manual-testing)
+    - [Site Navigation](#site-navigation)
+    - [Home Page](#home-page)
+    - [About Page](#about-page)
+    - [Treatments Page](#treatments-page)
+    - [Gallery Page](#gallery-page)
+    - [Book page](#book-page)
+    - [Contact page](#contact-page)
+    - [User Dashboard](#user-dashboard)
+- [Automated testing](#automated-testing)
+    - [Running the test suite](#running-the-test-suite)
+- [Bugs](#bugs)
+
+<!-- /TOC -->
+
 ## Validator Testing
 
 ### HTML
