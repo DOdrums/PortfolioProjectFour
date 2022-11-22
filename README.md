@@ -294,7 +294,7 @@ Site owner has a lot of control over the website and database entries via the ad
 
 ![admin](static/images/admin.png)
 
-The user can look at registered email-adresses, email stats (SES stats), appointments, gallery images, planning, treatments and users. The social accounts are not in use and groups can be used if wanted. Let's have a look at some of them.
+The user can look at registered email-adresses, appointments, gallery images, planning, treatments and users. The social accounts are not in use and groups can be used if wanted. Let's have a look at some of them.
 
 The first thing you would probably add is a planning, so users know which times they can book. This is what the planning object looks like:
 
