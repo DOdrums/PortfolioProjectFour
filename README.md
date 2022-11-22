@@ -203,7 +203,7 @@ When cancel gets clicked, user will be asked to confirm their choice, by a modal
 
 ![user dashboard cancel modal](static/images/dashboard-cancel.png)
 
-The other button present in the appointment accordions is an 'Change date' button. This button will allow the user to change the date of the appointment. After the clicking the button, they will be redirected to a page similar to the booking page, except the treatment is pre-selected. Furthermore, the only thing they can change if the date.
+The other button present in the appointment accordions is a 'Change date' button. This button will allow the user to change the date of the appointment. After clicking the button, they will be redirected to a page similar to the booking page, except the treatment is pre-selected. Furthermore, the only thing they can change is the date.
 
 ![user dashboard edit](static/images/dashboard-edit.png)
 
