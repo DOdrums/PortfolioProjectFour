@@ -15,6 +15,58 @@ This project is built as part of the Code Institute Full Stack Software Developm
 [PortfolioProjectFour](https://github.com/DOdrums/PortfolioProjectFour)
 
 
+<!-- TOC -->
+
+- [Smart House Inventory](#smart-house-inventory)
+    - [Portfolio Project 4: Full Stack Toolkit](#portfolio-project-4-full-stack-toolkit)
+    - [Live Site](#live-site)
+    - [Github Repository](#github-repository)
+    - [UX](#ux)
+        - [Business Goals](#business-goals)
+        - [Target Audience](#target-audience)
+        - [User Stories](#user-stories)
+        - [Structure of the app](#structure-of-the-app)
+        - [Logic/Database Diagram](#logicdatabase-diagram)
+        - [Color Scheme](#color-scheme)
+        - [Features](#features)
+            - [Book page](#book-page)
+            - [User dashboard](#user-dashboard)
+            - [Home](#home)
+            - [Nav bar](#nav-bar)
+            - [Hero Image](#hero-image)
+            - [Treatments](#treatments)
+            - [About](#about)
+            - [Footer](#footer)
+            - [About](#about)
+            - [Treatments](#treatments)
+            - [Gallery](#gallery)
+            - [Contact](#contact)
+            - [Login/Logout](#loginlogout)
+            - [Admin](#admin)
+        - [Future Features](#future-features)
+            - [Notifications](#notifications)
+    - [Credits](#credits)
+        - [Code](#code)
+        - [Images](#images)
+        - [Technologies used](#technologies-used)
+    - [Testing](#testing)
+    - [Security Features and Defensive Design](#security-features-and-defensive-design)
+        - [User authentication](#user-authentication)
+        - [Form Validation](#form-validation)
+        - [Database Security](#database-security)
+    - [Deployment](#deployment)
+        - [Local Deployment](#local-deployment)
+        - [Production Deployment Initial](#production-deployment-initial)
+            - [Create Heroku app:](#create-heroku-app)
+            - [Connect Postgres Database:](#connect-postgres-database)
+            - [Deploy App on Heroku:](#deploy-app-on-heroku)
+        - [Production Deployment Update](#production-deployment-update)
+            - [PostgreSQL database:](#postgresql-database)
+    - [Acknowledgements](#acknowledgements)
+
+<!-- /TOC -->
+
+
 ## UX
 
 ### Business Goals
@@ -343,7 +395,22 @@ Images inside the app are either royalty free stock imagery, or courtesy of Nail
 
 ## Testing
 
-Extensive testing was done to make sure all the features work as expected. To read all about this, please go to the seperate [testing document](TESTING.md).
+Extensive testing was done to make sure all the features work as expected. To read all about this, please go to the separate [testing document](TESTING.md).
+
+## Security Features and Defensive Design
+
+### User authentication
+
+* Django's all auth was used for login and sign up functionality.
+* Django's superuser is used to limit access to admin panel.
+
+### Form Validation
+
+Extensive form validation is used on front end as well as backend.
+
+### Database Security
+
+All secret keys connecting the database are stored in a env.py file that is never pushed to github. Furthermore, Cross-Site Request Forgery (CSFR) tokens were used on all forms throughout the project.
 
 ## Deployment
 
