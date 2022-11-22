@@ -27,7 +27,7 @@ class BookingModule(View):
 
     def get(self, request):
         """
-        Gets all neccesary data: Appointments, Treatments and Planning.
+        Gets all necessary data: Appointments, Treatments and Planning.
         Passes it as context while rendering book.html.
         """
         user_dict = {}
@@ -58,8 +58,8 @@ class BookingModule(View):
 
     def post(self, request):
         """
-        Post methode for booking an appointment.
-        Checks if forms is valid and takes appropiate action.
+        Post method for booking an appointment.
+        Checks if forms is valid and takes appropriate action.
         """
         form = AppointmentForm(request.POST)
         if form.is_valid():
@@ -97,7 +97,7 @@ class BookingModule(View):
 
 class ThankYou(View):
     """
-    Simple view to render the booked.html page for succesful bookings.
+    Simple view to render the booked.html page for successful bookings.
     """
 
     def get(self, request):
@@ -108,7 +108,7 @@ class ThankYou(View):
 
 class BookError(View):
     """
-    View to render page in case of unsuccesful booking.
+    View to render page in case of unsuccessful booking.
     """
 
     def get(self, request):
